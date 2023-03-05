@@ -66,6 +66,27 @@ const removeLinks = (body) => {
   return newStr;
 }
 
+// https://stackoverflow.com/a/9609450/2710227
+const decodeEntities = (function() {
+  // this prevents any overhead from creating the object each time
+  var element = document.createElement('div');
+
+  function decodeHTMLEntities (str) {
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = '';
+    }
+
+    return str;
+  }
+
+  return decodeHTMLEntities;
+})();
+
 // recursive function
 const getHnArticleData = async (articleIds, articleData, promiseResolver) => {
   if (articleIds.length) {
@@ -82,7 +103,7 @@ const getHnArticleData = async (articleIds, articleData, promiseResolver) => {
 
     articleData[articleId] = {
       title: articleTopCommentInfo.title, 
-      comment: stripHtml(removeLinks(articleTopComment.text)),
+      comment: decodeEntities(stripHtml(removeLinks(articleTopComment.text))),
     };
 
     articleIds.shift();
@@ -99,11 +120,15 @@ const processHnQueue = async (articleIds, articleData) => {
 }
 
 export const getHnTopArticleComments = async () => {
-  const articleIds = await getTopArticleIds();
-
-  const articleData = {};
-
-  await processHnQueue(articleIds, articleData);
-
-  console.log(articleData);
+  return new Promise(async (resolve, reject) => {
+    try {
+      const articleIds = await getTopArticleIds();
+      const articleData = {};
+      await processHnQueue(articleIds, articleData);
+      console.log(articleData);
+      resolve(articleData);
+    } catch (error) {
+      reject(error)
+    }
+  });
 }

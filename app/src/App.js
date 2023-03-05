@@ -6,12 +6,15 @@ import { getHnTopArticleComments} from './hacker-news/hn';
 
 function App() {
   const [connected, setConnected] = useState(false);
+  const [hnArticleData, setHnArticleData] = useState(false); // type mixing
 
   const getHn = async () => {
-    await getHnTopArticleComments();
+    const hnData = await getHnTopArticleComments();
+    setHnArticleData(hnData);
   }
 
   const displayHnArticleComment = (articleComments) => {
+    console.log('called');
     return new Promise(resolve => {
       const articleIds = Object.keys(articleComments);
       
@@ -21,9 +24,11 @@ function App() {
         setTimeout(async () => {
           let replCmd = 'import display;'
   
-          replCmd += `display.text(${body.title.substring(0, 26)}, 0, 0, 0xffffff`;;
-          replCmd += `display.text(${body.comment.substring(0, 26)}, 0, 50, 0xffffff});`;
-          replCmd += 'display.show()'
+          replCmd += `display.text("${body.title.substring(0, 26)}", 0, 0, 0xffffff);`;
+          replCmd += `display.text("${body.comment.substring(0, 26)}", 0, 50, 0xffffff);`;
+          replCmd += 'display.show();'
+
+          console.log('send', replCmd);
   
           await replSend(replCmd);
           delete articleIds[articleIds[0]];
@@ -37,7 +42,7 @@ function App() {
   // send to monocle display
   const displayHnArticleComments = async (hnArticleComments) => {
     await replRawMode(true);
-    displayHnArticleComment(hnArticleComments);
+    await displayHnArticleComment(hnArticleComments);
   }
 
   const logger = async (msg) => {
@@ -45,9 +50,14 @@ function App() {
       setConnected(true);
     }
 
-    const hnArticleComments = getHn();
-    displayHnArticleComments(hnArticleComments);
+    getHn();
   }
+
+  useEffect(() => {
+    if (Object.keys(hnArticleData).length) {
+      displayHnArticleComments(hnArticleData);
+    }
+  }, [hnArticleData]);
 
   return (
     <div className="App">

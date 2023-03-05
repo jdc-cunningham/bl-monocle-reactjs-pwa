@@ -7,9 +7,8 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // https://stackoverflow.com/questions/49055172/react-component-mounting-twice
+  <App /> /* strict mode removed to avoid double mounting */
 );
 
 // If you want to start measuring performance in your app, pass a function

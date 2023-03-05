@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './assets/styles/App.css';
 import { ensureConnected } from './bluetooth/js/main';
 import { replRawMode, replSend } from './bluetooth/js/repl';
+import { getHnTopArticleComments} from './hacker-news/hn';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -22,6 +23,14 @@ function App() {
 
     console.log(msg)
   }
+
+  const getHn = async () => {
+    await getHnTopArticleComments();
+  }
+
+  useEffect(() => {
+    getHn()
+  }, []);
 
   return (
     <div className="App">

@@ -1,21 +1,27 @@
 import { useState, useEffect } from 'react';
 import './assets/styles/App.css';
 import { ensureConnected } from './bluetooth/web-bluetooth-repl/js/main';
+import { replRawMode, replSend } from './bluetooth/web-bluetooth-repl/js/repl';
 
 function App() {
   const [connected, setConnected] = useState(false);
 
-  const logger = (msg) => {
+  const sampleCmds = [
+    'import display;',
+    'display.text("yo", 0, 0, 0xffffff);',
+    'display.show();'
+  ];
+
+  const logger = async (msg) => {
     if (msg === 'Connected') {
       setConnected(true);
     }
 
+    await replRawMode(true);
+    await replSend(sampleCmds.join(''));
+
     console.log(msg)
   }
-
-  // useEffect(() => {
-  //   ensureConnected(logger);
-  // }, []);
 
   return (
     <div className="App">

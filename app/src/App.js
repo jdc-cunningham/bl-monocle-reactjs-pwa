@@ -7,30 +7,47 @@ import { getHnTopArticleComments} from './hacker-news/hn';
 function App() {
   const [connected, setConnected] = useState(false);
 
-  const sampleCmds = [
-    'import display;',
-    'display.text("yo", 0, 0, 0xffffff);',
-    'display.show();'
-  ];
+  const getHn = async () => {
+    await getHnTopArticleComments();
+  }
+
+  const displayHnArticleComment = (articleComments) => {
+    return new Promise(resolve => {
+      const articleIds = Object.keys(articleComments);
+      
+      if (articleIds.length) {
+        const body = articleComments[articleIds[0]];
+
+        setTimeout(async () => {
+          let replCmd = 'import display;'
+  
+          replCmd += `display.text(${body.title.substring(0, 26)}, 0, 0, 0xffffff`;;
+          replCmd += `display.text(${body.comment.substring(0, 26)}, 0, 50, 0xffffff});`;
+          replCmd += 'display.show()'
+  
+          await replSend(replCmd);
+          delete articleIds[articleIds[0]];
+        }, 5000);
+      } else {
+        resolve(""); // done
+      }
+    });
+  }
+
+  // send to monocle display
+  const displayHnArticleComments = async (hnArticleComments) => {
+    await replRawMode(true);
+    displayHnArticleComment(hnArticleComments);
+  }
 
   const logger = async (msg) => {
     if (msg === 'Connected') {
       setConnected(true);
     }
 
-    await replRawMode(true);
-    await replSend(sampleCmds.join(''));
-
-    console.log(msg)
+    const hnArticleComments = getHn();
+    displayHnArticleComments(hnArticleComments);
   }
-
-  const getHn = async () => {
-    await getHnTopArticleComments();
-  }
-
-  useEffect(() => {
-    getHn()
-  }, []);
 
   return (
     <div className="App">

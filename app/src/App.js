@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './assets/styles/App.css';
-import { ensureConnected } from './bluetooth/web-bluetooth-repl/js/main';
-import { replRawMode, replSend } from './bluetooth/web-bluetooth-repl/js/repl';
+import { ensureConnected } from './bluetooth/js/main';
+import { replRawMode, replSend } from './bluetooth/js/repl';
 
 function App() {
   const [connected, setConnected] = useState(false);

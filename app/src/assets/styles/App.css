@@ -1,0 +1,61 @@
+.App {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #303030;
+  padding: 0.5rem;
+}
+
+.App span.connect {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+
+.App span.connect button {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 50%;
+}
+
+.snippet span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.run {
+  cursor: pointer;
+}
+
+.run:disabled {
+  opacity: 0.6;
+}
+
+.snippet {
+  background-color: #505050;
+  padding: 0.25rem;
+}
+
+.snippet:not(:first-of-type) {
+  margin-top: 0.5rem;
+}
+
+.snippet .body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  min-height: 150px;
+}

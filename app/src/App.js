@@ -31,7 +31,8 @@ function App() {
           console.log('send', replCmd);
   
           await replSend(replCmd);
-          delete articleIds[articleIds[0]];
+          delete articleComments[articleIds[0]];
+          displayHnArticleComment(articleComments);
         }, 5000);
       } else {
         resolve(""); // done

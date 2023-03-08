@@ -24,8 +24,8 @@ function App() {
         setTimeout(async () => {
           let replCmd = 'import display;'
   
-          replCmd += `display.text("${body.title.substring(0, 26)}", 0, 0, 0xffffff);`;
-          replCmd += `display.text("${body.comment.substring(0, 26)}", 0, 50, 0xffffff);`;
+          replCmd += `display.text("${body.title.substring(0, 21)}", 0, 0, 0xffffff);`;
+          replCmd += `display.text("${body.comment.substring(0, 21)}", 0, 50, 0xffffff);`;
           replCmd += 'display.show();'
 
           console.log('send', replCmd);

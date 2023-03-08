@@ -41,6 +41,7 @@
 
 .run:disabled {
   opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .snippet {
@@ -53,9 +54,13 @@
 }
 
 .snippet .body {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  min-height: 150px;
+  display: block;
+  min-height: 300px;
+  min-width: 350px;
+  white-space: pre-line;
+  background-color: #606060;
+  color: white;
+  line-height: 1.25;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
 }

@@ -20,9 +20,11 @@ function App() {
 
     let cmdStr = '';
 
-    snippet.querySelectorAll('p').forEach(line => {
-      cmdStr += line.innerText + ';';
+    snippet.value.split('\n').forEach(line => {
+      cmdStr += line + ';';
     });
+
+    console.log(cmdStr);
 
     sendToMonocle(cmdStr);
   }
@@ -46,60 +48,12 @@ function App() {
               <button
                 type="button"
                 className="run"
-                disabled={running}
+                disabled={!connected || running}
                 onClick={() => runCmd('white')}
               >run</button>
             </span>
-            <div className="body" id="white">
-              <p>import display</p>
-              <p>display.text("White text line", 0, 0, 0xffffff)</p>
-              <p>display.show()</p>
-            </div>
-          </div>
-          <div className="snippet">
-            <span>
-              <button
-                type="button"
-                className="run"
-                disabled={running}
-                onClick={() => runCmd('green')}
-              >run</button>
-            </span>
-            <div className="body" id="green">
-              <p>import display</p>
-              <p>display.text("Green text line", 0, 0, 0x00ff00)</p>
-              <p>display.show()</p>
-            </div>
-          </div>
-          <div className="snippet">
-            <span>
-              <button
-                type="button"
-                className="run"
-                disabled={running}
-                onClick={() => runCmd('blue')}
-              >run</button>
-            </span>
-            <div className="body" id="blue">
-              <p>import display</p>
-              <p>display.text("Blue text line", 0, 0, 0x0000ff)</p>
-              <p>display.show()</p>
-            </div>
-          </div>
-          <div className="snippet">
-            <span>
-              <button
-                type="button"
-                className="run"
-                disabled={running}
-                onClick={() => runCmd('red')}
-              >run</button>
-            </span>
-            <div className="body" id="red">
-              <p>import display</p>
-              <p>display.text("Red text line", 0, 0, 0xff0000)</p>
-              <p>display.show()</p>
-            </div>
+            <textarea className="body" id="white" spellcheck="false">
+            </textarea>
           </div>
         </div>
       </div>

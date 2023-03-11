@@ -4,63 +4,98 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #303030;
+  background-color: white;
   padding: 0.5rem;
-}
-
-.App span.connect {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  margin: 1rem 0;
+  justify-content: center;
 }
 
-.App span.connect button {
-  margin-left: 0.5rem;
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+button {
   cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  background-color: #EC5800;
+  box-shadow: 2px 2px 2px #505050;
+  color: white;
+  border-radius: 4px;
+  border: 0;
 }
 
-.container {
+button:hover, button:active {
+  background-color: #D44F00;
+}
+
+.App .intro {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  width: 50%;
 }
 
-.snippet span {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.run {
-  cursor: pointer;
-}
-
-.run:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.snippet {
-  background-color: #505050;
-  padding: 0.25rem;
-}
-
-.snippet:not(:first-of-type) {
+.App .intro p {
+  font-size: 1.25rem;
   margin-top: 0.5rem;
 }
 
-.snippet .body {
+.App .intro button {
+  margin-top: 1rem;
+}
+
+.apps-container h2 {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.apps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 80vw;
+}
+
+.app {
+  width: 35%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px 2px #505050;
+  padding: 0.25rem;
+}
+
+.app p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.app-img {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 75% auto;
+}
+
+.app-img::before {
+  content: "";
   display: block;
-  min-height: 300px;
-  min-width: 350px;
-  white-space: pre-line;
-  background-color: #606060;
-  color: white;
-  line-height: 1.25;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
+  padding-top: 80%;
+}
+
+.loaded-app {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+}
+
+.loaded-app button {
+  margin-top: 1rem;
 }

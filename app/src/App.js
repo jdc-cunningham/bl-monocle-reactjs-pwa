@@ -1,61 +1,55 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './assets/styles/App.css';
 import { ensureConnected } from './bluetooth/js/main';
-import { replRawMode, replSend } from './bluetooth/js/repl';
+import WeightLiftingIcon from './assets/icons/uxwing_weight-lifting.svg';
 
-function App() {
-  const [connected, setConnected] = useState(false);
-  const [running, setRunning] = useState(false);
-
-  // send to monocle display
-  const sendToMonocle = async (replStr) => {
-    setRunning(true);
-    await replRawMode(true);
-    await replSend(replStr);
-    setRunning(false);
-  }
-
-  const runCmd = (id) => {
-    const snippet = document.getElementById(id);
-
-    // https://github.com/siliconwitchery/web-bluetooth-repl/blob/b13ade8c1aa9754e4a2ad917c2d227705c02ef7f/js/repl.js#L269
-    let string = '';
-    string = snippet.value.replaceAll('\r\n', '\r');
-    string = string.replaceAll('\n', '\r');
-
-    sendToMonocle(string);
-  }
+const App = () => {
+  const [activeApp, setActiveApp] = useState(false);
+  const [connected, setConnected] = useState(true);
+  const [connecting, setConnecting] = useState(false);
 
   const logger = async (msg) => {
     if (msg === 'Connected') {
       setConnected(true);
     }
-  }
+  };
 
-  return (
-    <div className="App">
-      <span className="connect">
-        <p>{connected ? "connected" : "disconnected"}</p>
-        <button type="button" onClick={() => ensureConnected(logger)}>Connect</button>
-      </span>
-      <div className="container">
-        <div className="snippets">
-          <div className="snippet">
-            <span>
-              <button
-                type="button"
-                className="run"
-                disabled={!connected || running}
-                onClick={() => runCmd('white')}
-              >run</button>
-            </span>
-            <textarea className="body" id="white" spellCheck="false">
-            </textarea>
-          </div>
+  const loadedApp = (
+    <div className="loaded-app">
+      <h2>Active app: {activeApp}</h2>
+      <button type="button" onClick={() => setActiveApp(false)}>Back to apps</button>
+    </div>
+  );
+
+  const apps = (
+    <div className="apps-container">
+      <div className="apps">
+        <div className="app" onClick={() => setActiveApp('workout')}>
+          <div className="app-img" style={{backgroundImage: `url(${WeightLiftingIcon})`}}></div>
+          <p>Workout</p>
         </div>
+      </div>
+      <div className="apps-title">
+        <h2>Monocle Apps</h2>
       </div>
     </div>
   );
-}
+
+  const intro = (
+    <div className="intro">
+      <h1>Monocle PWA</h1>
+      {connecting && <p>{connected ? 'Connected' : 'Connecting...'}</p>}
+      {!connecting && <button onClick={() => ensureConnected(logger)}>Connect</button>}
+    </div>
+  );
+
+  return (
+    <div className="App">
+      {(!connected && !activeApp) && intro}
+      {(connected && !activeApp) && apps}
+      {activeApp && loadedApp}
+    </div>
+  );
+};
 
 export default App;

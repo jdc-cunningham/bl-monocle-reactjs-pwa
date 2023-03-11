@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './assets/styles/App.css';
 import { ensureConnected } from './bluetooth/js/main';
 import WeightLiftingIcon from './assets/icons/uxwing_weight-lifting.svg';
+import { execMonocle } from './comms';
+import { workoutApp } from './apps/workout/workout';
 
 const App = () => {
   const [activeApp, setActiveApp] = useState(false);
@@ -9,6 +11,7 @@ const App = () => {
   const [connecting, setConnecting] = useState(false);
 
   const logger = async (msg) => {
+    console.log('repl response', msg);
     if (msg === 'Connected') {
       setConnecting(false);
       setConnected(true);
@@ -48,6 +51,14 @@ const App = () => {
       {!connecting && <button onClick={() => connect()}>Connect</button>}
     </div>
   );
+
+  useEffect(() => {
+    if (activeApp) {
+      if (activeApp === 'workout') {
+        workoutApp.run(execMonocle);
+      }
+    }
+  }, [activeApp]);
 
   return (
     <div className="App">

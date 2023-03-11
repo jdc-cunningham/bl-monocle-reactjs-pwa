@@ -1,9 +1,21 @@
 ### About
 
-This primarily is a way to headlessly feed code into the Brilliant Labs Monocle AR device.
+This is a workout app, has no CV aspect to it, pretty much a HUD interface
 
-In my case I prefer web-based apps over native due to lack of skill.
+It is a sub-app for the PWA react app launcher
 
-I'm building on top of the bluetooth via JS capability (Chrome) provided by this [library](https://github.com/brilliantlabsAR/web-bluetooth-repl).
+### App flow
 
-After that I can just use this to feed micropython code designed in other places, right now I've got my own editor but not really an editor.
+- phone
+  - launch app from PWA apps page
+- monocle
+  - controls guide
+  - workout splash page
+  - workout table with sets and name column/rows
+  - active workout
+- future
+  - store on phone for later view
+
+### JS to micropython/monocle
+
+I'm building on top of the bluetooth via JS capability (Chrome) provided by this [library](https://github.com/siliconwitchery/web-bluetooth-repl).

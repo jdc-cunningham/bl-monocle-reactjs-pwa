@@ -18,15 +18,12 @@ function App() {
   const runCmd = (id) => {
     const snippet = document.getElementById(id);
 
-    let cmdStr = '';
+    // https://github.com/siliconwitchery/web-bluetooth-repl/blob/b13ade8c1aa9754e4a2ad917c2d227705c02ef7f/js/repl.js#L269
+    let string = '';
+    string = snippet.value.replaceAll('\r\n', '\r');
+    string = string.replaceAll('\n', '\r');
 
-    snippet.value.split('\n').forEach(line => {
-      cmdStr += line + ';';
-    });
-
-    console.log(cmdStr);
-
-    sendToMonocle(cmdStr);
+    sendToMonocle(string);
   }
 
   const logger = async (msg) => {
@@ -52,7 +49,7 @@ function App() {
                 onClick={() => runCmd('white')}
               >run</button>
             </span>
-            <textarea className="body" id="white" spellcheck="false">
+            <textarea className="body" id="white" spellCheck="false">
             </textarea>
           </div>
         </div>

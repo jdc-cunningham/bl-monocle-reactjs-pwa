@@ -5,11 +5,12 @@ import WeightLiftingIcon from './assets/icons/uxwing_weight-lifting.svg';
 
 const App = () => {
   const [activeApp, setActiveApp] = useState(false);
-  const [connected, setConnected] = useState(true);
+  const [connected, setConnected] = useState(false);
   const [connecting, setConnecting] = useState(false);
 
   const logger = async (msg) => {
     if (msg === 'Connected') {
+      setConnecting(false);
       setConnected(true);
     }
   };
@@ -35,11 +36,16 @@ const App = () => {
     </div>
   );
 
+  const connect = () => {
+    setConnecting(true);
+    ensureConnected(logger);
+  }
+
   const intro = (
     <div className="intro">
       <h1>Monocle PWA</h1>
       {connecting && <p>{connected ? 'Connected' : 'Connecting...'}</p>}
-      {!connecting && <button onClick={() => ensureConnected(logger)}>Connect</button>}
+      {!connecting && <button onClick={() => connect()}>Connect</button>}
     </div>
   );
 

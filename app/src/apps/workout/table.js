@@ -37,7 +37,7 @@ export const table = (workoutInfo) => {
     'display.text("Set 2", 360, 75, 0xffffff)',
     'display.text("Set 3", 510, 75, 0xffffff)',
     'display.line(0, 130, 640, 130, 0xffffff)',
-    'display.line(208, 75, 208, 400, 0xffffff)',
+    'display.line(208, 75, 208, 300, 0xffffff)',
     ...workoutRows(),
     `display.text(
       "${(workoutInfo['Situps'][0] > 0)

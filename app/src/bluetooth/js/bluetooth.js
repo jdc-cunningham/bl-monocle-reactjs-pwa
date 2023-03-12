@@ -1,5 +1,4 @@
 import { receiveRawData, onDisconnect } from "./main.js"
-import { relay } from "./relay.js";
 import { nordicDfuHandleControlResponse } from './nordicdfu.js'
 
 let device = null;
@@ -29,6 +28,8 @@ let replTxTaskIntervalId = null
 let replDataTxInProgress = false;
 let rawDataTxInProgress = false;
 
+let relayCallback;
+
 // Web-Bluetooth doesn't have any MTU API, so we just set it to something reasonable
 const max_mtu = 100;
 
@@ -41,12 +42,14 @@ export function isConnected() {
     return false;
 }
 
-export async function connect() {
+export async function connect(relayCallbackArg) {
 
     if (!navigator.bluetooth) {
         return Promise.reject("This browser doesn't support WebBluetooth. " +
             "Make sure you're on Chrome Desktop/Android or BlueFy iOS.")
     }
+
+    relayCallback = relayCallbackArg;
 
     // Bluefy on ios currently doesn't allow multiple filters
     if (/iPhone|iPad/.test(navigator.userAgent)) {
@@ -130,7 +133,11 @@ function receiveReplData(event) {
     // Decode the byte array into a UTF-8 string
     const decoder = new TextDecoder('utf-8');
 
-    relay(decoder.decode(event.target.value));
+    console.log('call relay');
+
+    console.log(typeof relayCallback);
+
+    relayCallback(decoder.decode(event.target.value));
 }
 
 async function transmitReplData() {

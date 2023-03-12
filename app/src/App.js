@@ -18,6 +18,16 @@ const App = () => {
     }
   };
 
+  const relayCallback = (msg) => {
+    if (msg === 'trigger a') {
+      workoutApp.leftBtnCallback();
+    }
+
+    if (msg === 'trigger b') {
+      workoutApp.rightBtnCallback();
+    }
+  }
+
   const loadedApp = (
     <div className="loaded-app">
       <h2>Active app: {activeApp}</h2>
@@ -41,7 +51,7 @@ const App = () => {
 
   const connect = () => {
     setConnecting(true);
-    ensureConnected(logger);
+    ensureConnected(logger, relayCallback);
   }
 
   const intro = (

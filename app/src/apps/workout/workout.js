@@ -8,19 +8,12 @@ import { touch } from '../../mpython-common/touch';
 let cmdRunner;
 let appMode = '';
 
-const leftBtnCallback = () => {
-
-}
-
-const rightBtnCallback = () => {
-  
-}
-
 const showControls = () => {
   cmdRunner(imports());
+  // cmdRunner(battery());
   cmdRunner(borders(true));
   cmdRunner(controls());
-  // cmdRunner(touch(leftBtnCallback, rightBtnCallback));
+  cmdRunner(touch());
   cmdRunner(render());
 };
 
@@ -40,5 +33,11 @@ export const workoutApp = {
   run: (execMonocle) => {
     cmdRunner = execMonocle;
     showControls();
+  },
+  leftBtnCallback: () => {
+    console.log('left');
+  },
+  rightBtnCallback: () => {
+    console.log('right');
   }
 }

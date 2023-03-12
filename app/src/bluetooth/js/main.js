@@ -1,14 +1,14 @@
 import { connect, disconnect, isConnected } from "./bluetooth.js";
 import { startNordicDFU } from "./nordicdfu.js"
 
-export async function ensureConnected(statusCallback) {
+export async function ensureConnected(statusCallback, relayCallback) {
 
     if (isConnected() === true) {
         return;
     }
 
     try {
-        let connectionResult = await connect();
+        let connectionResult = await connect(relayCallback);
 
         if (connectionResult === "dfu connected") {
             statusCallback("Starting firmware update..");

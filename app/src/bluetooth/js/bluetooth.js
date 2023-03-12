@@ -133,10 +133,6 @@ function receiveReplData(event) {
     // Decode the byte array into a UTF-8 string
     const decoder = new TextDecoder('utf-8');
 
-    console.log('call relay');
-
-    console.log(typeof relayCallback);
-
     relayCallback(decoder.decode(event.target.value));
 }
 

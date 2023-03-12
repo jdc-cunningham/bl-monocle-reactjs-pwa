@@ -19,11 +19,11 @@ const App = () => {
   };
 
   const relayCallback = (msg) => {
-    if (msg === 'trigger a') {
+    if (msg.trim() === 'trigger b') { // flipped back view
       workoutApp.leftBtnCallback();
     }
 
-    if (msg === 'trigger b') {
+    if (msg.trim() === 'trigger a') {
       workoutApp.rightBtnCallback();
     }
   }

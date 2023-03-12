@@ -6,12 +6,43 @@ import { date } from '../../mpython-common/date';
 import { controls } from './controls';
 import { touch } from '../../mpython-common/touch';
 import { table } from '../workout/table';
+import { activeWorkout } from './activeWorkout';
+import { welcome } from './welcome';
 
 let cmdRunner;
-let appScene = 'intro';
+let appScene = 'controls';
+let btnChoice = 1; // 0 left, 1 right, default is right
+let curWorkout = 0;
+let set = 0;
+
+let workouts = {
+  'Squats': [0, 0, 0],
+  'Pushups': [0, 0, 0],
+  'Situps': [0, 0, 0],
+  // 'Curls': [0, 0, 0],
+  // 'Lat raise': [0, 0, 0] // can't see more, need scroll or smaller font
+};
+
+const resetWorkout = () => {
+  workouts = {
+    'Squats': [0, 0, 0],
+    'Pushups': [0, 0, 0],
+    'Situps': [0, 0, 0],
+    'Curls': [0, 0, 0],
+    'Lat raise': [0, 0, 0]
+  };
+}
+
+const importDeps = () => {
+  cmdRunner(imports());
+}
+
+const splashScreen = () => {
+  cmdRunner(welcome());
+  cmdRunner(render());
+}
 
 const showControls = () => {
-  cmdRunner(imports());
   cmdRunner(borders(true));
   cmdRunner(controls());
   cmdRunner(touch());
@@ -30,34 +61,53 @@ const getDate = () => {
 
 const showTable = () => {
   const todaysDate = getDate();
-  cmdRunner(imports());
   cmdRunner(battery());
   cmdRunner(date(todaysDate));
-  cmdRunner(table());
+  cmdRunner(table(workouts));
   cmdRunner(render());
 };
 
-const showActiveWorkout = () => {
-  
+const showActiveWorkout = (workout) => {
+  cmdRunner(activeWorkout(workout));
+  cmdRunner(render());
 };
 
 export const workoutApp = {
   run: (execMonocle) => {
     cmdRunner = execMonocle;
-    showControls();
+    importDeps();
+    splashScreen();
+    setTimeout(() => {
+      showControls();
+    }, 3000);
   },
   leftBtnCallback: () => { // navigate
     console.log('left');
   },
   rightBtnCallback: () => { // select
-    if (appScene === 'intro') {
+    if (appScene === 'controls') {
       appScene = 'workout-table';
       showTable();
-    }
-
-    if (appScene === 'workout-table') {
+    } else if (appScene === 'workout-table') { // else if due to states all firing in sequence
       appScene = 'active-workout';
-      showActiveWorkout();
+      showActiveWorkout(Object.keys(workouts)[curWorkout]);
+    } else if (appScene === 'active-workout') {
+      workouts[Object.keys(workouts)[curWorkout]][set] = 1;
+
+      if (curWorkout < Object.keys(workouts).length - 1) {
+        curWorkout += 1;
+        showActiveWorkout(Object.keys(workouts)[curWorkout]);
+      } else {
+        if (set < 2) {
+          set += 1;
+        } else {
+          set = 1; // reset app
+          resetWorkout();
+        }
+
+        appScene = 'workout-table';
+        showTable();
+      }
     }
   }
 }

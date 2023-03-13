@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Monocle PWA",
+  "name": "App launcher for Monocle",
   "icons": [
     {
       "src": "favicon.ico",

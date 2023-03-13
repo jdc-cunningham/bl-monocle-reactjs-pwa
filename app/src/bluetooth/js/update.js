@@ -1,5 +1,5 @@
 import { replSend, replRawMode } from "./repl.js";
-import { request } from "https://cdn.skypack.dev/@octokit/request";
+import { request } from "@octokit/request";
 
 export let gitInfo = {};
 

@@ -53,9 +53,8 @@
 }
 
 .snippet .body {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  min-height: 150px;
+  display: block;
+  min-height: 300px;
+  min-width: 500px;
+  white-space: pre-line;
 }

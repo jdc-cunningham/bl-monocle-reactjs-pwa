@@ -43,7 +43,7 @@ def draw_chart(chart_title, x_values, y_values, chart_type = "line", title_color
 
   for point in points:
     if (cur_point > 0):
-      display.line(points[cur_point - 1][0], points[cur_point - 1][1], points[cur_point][0], points[cur_point][1], y_colors[0])
+      display.vline(points[cur_point - 1][0], points[cur_point - 1][1], points[cur_point - 1][1], 0xffffff)
 
     cur_point += 1
 

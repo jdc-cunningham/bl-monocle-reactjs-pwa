@@ -54,7 +54,9 @@
 
 .snippet .body {
   display: block;
-  min-height: 300px;
-  min-width: 500px;
+  min-height: 350px;
+  min-width: 650px;
   white-space: pre-line;
+  background-color: #505050;
+  color: white;
 }

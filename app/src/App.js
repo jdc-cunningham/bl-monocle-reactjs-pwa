@@ -6,6 +6,7 @@ import { replRawMode, replSend } from './bluetooth/js/repl';
 function App() {
   const [connected, setConnected] = useState(false);
   const [running, setRunning] = useState(false);
+
   const [snippet, setSnippet] = useState([
     'import display',
     'display.text("White text line", 0, 0, 0xffffff)',
@@ -21,7 +22,6 @@ function App() {
   }
 
   const prepSend = (snippet) => {
-
     // https://github.com/siliconwitchery/web-bluetooth-repl/blob/b13ade8c1aa9754e4a2ad917c2d227705c02ef7f/js/repl.js#L269
     let string = '';
     string = snippet.replaceAll('\r\n', '\r');
@@ -57,7 +57,13 @@ function App() {
                 onClick={() => runCmd('white')}
               >run</button>
             </span>
-            <textarea className="body" id="white" value={snippet} onChange={(e) => setSnippet(e.target.value)}></textarea>
+            <textarea
+              className="body"
+              id="white"
+              value={snippet}
+              onChange={(e) => setSnippet(e.target.value)}
+              spellCheck={false}
+            ></textarea>
           </div>
         </div>
       </div>

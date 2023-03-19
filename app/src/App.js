@@ -30,8 +30,8 @@ function App() {
     sendToMonocle(string);
   }
 
-  const runCmd = (id) => {
-    prepSend(snippet);
+  const runCmd = (str) => {
+    prepSend(str || snippet);
   }
 
   const logger = async (msg) => {
@@ -39,6 +39,35 @@ function App() {
       setConnected(true);
     }
   }
+
+  const getDateTimeStr = () => new Date().toLocaleString();
+
+  const pollMonocle = () => {
+    runCmd([
+      `display.text("${getDateTimeStr()}", 0, 0, 0xffffff)`,
+      'display.show()'
+    ].join('\n'));
+
+    setTimeout(() => {
+      pollMonocle();
+    }, 3000);
+  }
+
+  useEffect(() => {
+    if (connected) {
+      runCmd([
+        'import display',
+        'import device',
+        'batt_lvl = device.battery_level()',
+        'display.text("batt: " + str(batt_lvl), 0, 0, 0xffffff)',
+        'display.show()'
+      ].join('\n'));
+
+      setTimeout(() => {
+        pollMonocle();
+      }, 3000);
+    }
+  }, [connected]);
 
   return (
     <div className="App">

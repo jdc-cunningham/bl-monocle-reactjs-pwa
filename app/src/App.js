@@ -7,6 +7,8 @@ function App() {
   const [connected, setConnected] = useState(false);
   const [running, setRunning] = useState(false);
 
+  let pollCounter = 0;
+
   const [snippet, setSnippet] = useState([
     'import display',
     'display.text("White text line", 0, 0, 0xffffff)',
@@ -50,6 +52,8 @@ function App() {
 
     setTimeout(() => {
       pollMonocle();
+      pollCounter += 1;
+      console.log('poll:', pollCounter);
     }, 3000);
   }
 

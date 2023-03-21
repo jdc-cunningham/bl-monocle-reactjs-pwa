@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/css/main.bf59a6bd.css",
+    "main.js": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/js/main.3decd701.js",
+    "static/js/787.c1112931.chunk.js": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/js/787.c1112931.chunk.js",
+    "static/media/uxwing_weight-lifting.svg": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/media/uxwing_weight-lifting.a565f5b2f5d224a6c102bb91617f178c.svg",
+    "index.html": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/index.html",
+    "main.bf59a6bd.css.map": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/css/main.bf59a6bd.css.map",
+    "main.3decd701.js.map": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/js/main.3decd701.js.map",
+    "787.c1112931.chunk.js.map": "https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/static/js/787.c1112931.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bf59a6bd.css",
+    "static/js/main.3decd701.js"
+  ]
+}

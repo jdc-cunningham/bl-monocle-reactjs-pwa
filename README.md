@@ -3,10 +3,12 @@
 This is an app launcher written in ReactJS as a PWA
 
 Apps
+
 - workout app
 - hacker news reader (in separate branch, not integrated here yet)
 
 ### Demo video
+
 <a href="https://www.youtube.com/watch?v=T8Ojr39Myuw">
   <img src="yt-thumb.JPG" alt="youtube thumbnail"/>
 </a>
@@ -17,7 +19,19 @@ Apps
 
 note: the source for the PWA live demo above is in the docs folder (static build)
 
+### Code flow
+
+See the images below for how this code works, pretty much:
+
+- monocle sends data to JS via `print("some string")`
+- JS sends code to monocle through `runCmd("mpython code line or function call")`
+
+<img src="./touch-pass-through.png"/>
+
+<img src="./main-app-parts.JPG"/>
+
 ### Note memory
+
 Everytime you push micropython code into the monocle it uses up ram/storage on the monocle.
 
 Eventually the monocle will reboot itself.

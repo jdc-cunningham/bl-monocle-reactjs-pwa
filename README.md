@@ -4,7 +4,7 @@ This is an app launcher written in ReactJS as a PWA
 
 Apps
 - workout app
-- hacker news reader
+- hacker news reader (in separate branch, not integrated here yet)
 
 ### Demo video
 <a href="https://www.youtube.com/watch?v=T8Ojr39Myuw">

@@ -15,7 +15,7 @@ Apps
 
 <a href="https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/">View PWA</a>
 
-note: the source above is in the docs folder (static build)
+note: the source for the PWA live demo above is in the docs folder (static build)
 
 ### Note memory
 Everytime you push micropython code into the monocle it uses up ram/storage on the monocle.

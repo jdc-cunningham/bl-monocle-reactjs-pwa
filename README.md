@@ -11,6 +11,12 @@ Apps
   <img src="yt-thumb.JPG" alt="youtube thumbnail"/>
 </a>
 
+### Live demo (try on your monocle)
+
+<a href="https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/">View PWA</a>
+
+note: the source above is in the docs folder (static build)
+
 ### Note memory
 Everytime you push micropython code into the monocle it uses up ram/storage on the monocle.
 

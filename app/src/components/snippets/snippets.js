@@ -20,9 +20,17 @@ const Snippets = (props) => {
     }
   ]);
 
+  const saveToLocalStorage = () => {
+    localStorage.setItem('monocle-snippets', JSON.stringify(snippets))
+  }
+
+  useState(() => {
+    saveToLocalStorage();
+  }, [snippets]);
+
   const renderSnippets = () =>
-    snippets.map(snippet => (
-      <div className={`snippet ${snippet.collapsed ? 'closed' : ''}`}>
+    snippets.map((snippet, index) => (
+      <div key={index} className={`snippet ${snippet.collapsed ? 'closed' : ''}`}>
         <div className="snippet__top">
           <span>
             <input type="checkbox" selected={snippet.selected}/>
@@ -38,7 +46,7 @@ const Snippets = (props) => {
           </span>
         </div>
         <div className="snippet__body">
-          <textarea onChange={(e) => {}}>{snippet.content.join('\n')}</textarea>
+          <textarea onChange={(e) => {}} value={snippet.content.join('\n')}/>
         </div>
       </div>
     ));

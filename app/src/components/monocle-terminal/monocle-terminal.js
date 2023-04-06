@@ -8,20 +8,15 @@ const MonocleTerminal = (props) => {
     sendPythonLines,
     ensureConnected,
     logger,
-    monocleHistory
+    monocleHistory,
+    monocleInfo
   } = props;
   
-  const [monocleInfo, setMonocleInfo] = useState({
-    firmware: "0.0.0",
-    storageUsed: 0,
-    storage: 0,
-  });
-
   return (
     <div className="MonocleTerminal">
       <div className="MonocleTerminal__top">
         <div className="MonocleTerminal__top-row">
-          <h2>Monocle</h2>
+          <h2>Monocle info</h2>
           <div className="MonocleTerminal__top-row-connection">
             <button type="button" onClick={() => ensureConnected(logger)}>{connected ? 'connected' : 'connect'}</button>
             <div className={`MonocleTerminal__top-row-connection-indicator ${connected ? 'connected' : ''}`}></div>
@@ -29,7 +24,7 @@ const MonocleTerminal = (props) => {
         </div>
         <div className="MonocleTerminal__top-row info">
           <h3>Firmware version: {monocleInfo.firmware}</h3>
-          <h3>Used storage: {monocleInfo.storageUsed}/{monocleInfo.storage}</h3>
+          <h3>Used storage: {monocleInfo.storageUsed}/{monocleInfo.storage} bytes</h3>
         </div>
       </div>
       <div className="MonocleTerminal__body">

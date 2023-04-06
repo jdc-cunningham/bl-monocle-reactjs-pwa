@@ -50,12 +50,16 @@
   background-color: green;
 }
 
+.MonocleTerminal__body {
+  overflow-y: auto;
+}
+
 .MonocleTerminal__body textarea {
   background-color: #303030;
   color: white;
   padding: 0.25rem;
   margin-top: 0.25rem;
   width: 100%;
-  min-height: 250px;
+  min-height: 150px;
   cursor: default;
 }

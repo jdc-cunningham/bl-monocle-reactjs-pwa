@@ -28,6 +28,7 @@ export const rawDataTxQueue = [];
 let replTxTaskIntervalId = null
 let replDataTxInProgress = false;
 let rawDataTxInProgress = false;
+let statusCallback;
 
 // Web-Bluetooth doesn't have any MTU API, so we just set it to something reasonable
 const max_mtu = 100;
@@ -41,7 +42,9 @@ export function isConnected() {
     return false;
 }
 
-export async function connect() {
+export async function connect(statusCallbackArg) {
+
+    statusCallback = statusCallbackArg;
 
     if (!navigator.bluetooth) {
         return Promise.reject("This browser doesn't support WebBluetooth. " +
@@ -126,11 +129,11 @@ export async function transmitNordicDfuPacketData(bytes) {
 }
 
 function receiveReplData(event) {
-
     // Decode the byte array into a UTF-8 string
     const decoder = new TextDecoder('utf-8');
+    const decodedMsg = decoder.decode(event.target.value);
 
-    relay(decoder.decode(event.target.value));
+    statusCallback('relay: ' + decodedMsg)
 }
 
 async function transmitReplData() {

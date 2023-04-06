@@ -8,7 +8,7 @@ export async function ensureConnected(statusCallback) {
     }
 
     try {
-        let connectionResult = await connect();
+        let connectionResult = await connect(statusCallback);
 
         if (connectionResult === "dfu connected") {
             statusCallback("Starting firmware update..");

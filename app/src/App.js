@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import './assets/styles/App.css';
 import { ensureConnected } from './bluetooth/js/main';
 import { sendPythonLines } from './utils/comms';
+import MonocleTerminal from './components/monocle-terminal/monocle-terminal';
 
 function App() {
   const [connected, setConnected] = useState(false);
   const [writing, setWriting] = useState(false);
+  const [monocleHistory, setMonocleHistory] = useState(['Monocle logs']);
 
   const [snippet, setSnippet] = useState([
     'import display',
@@ -21,21 +23,32 @@ function App() {
 
     if (msg === 'Connected') {
       setConnected(true);
-      sendPythonLines(snippet, setWriting);
+
+      // get device info
+      // print to get response string
+      sendPythonLines(
+        [
+          'import device',
+          'print(device.VERSION)',
+          'print(gc.mem_free())'
+        ],
+        setWriting
+      )
     }
 
     // monocle is done processing
     if (msg.indexOf('relay: OK') !== -1) {
       setWriting(false);
     }
+
+    setMonocleHistory(prevState => [
+     ...prevState,
+     msg.replace('relay: ', '')
+    ]);
   }
 
   return (
     <div className="App">
-      <span className="connect">
-        <p>{connected ? "connected" : "disconnected"}</p>
-        <button type="button" onClick={() => ensureConnected(logger)}>Connect</button>
-      </span>
       <div className="container">
         <div className="container__left">
           <div className="snippets">
@@ -57,6 +70,14 @@ function App() {
               ></textarea>
             </div>
           </div>
+          <MonocleTerminal
+            connected={connected}
+            writing={writing}
+            sendPythonLines={sendPythonLines}
+            ensureConnected={ensureConnected}
+            logger={logger}
+            monocleHistory={monocleHistory}
+          />
         </div>
         <div className="container__right">
 

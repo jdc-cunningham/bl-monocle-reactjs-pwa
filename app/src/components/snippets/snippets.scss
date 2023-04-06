@@ -1,0 +1,67 @@
+.Snippets {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #505050;
+  border-radius: 4px;
+  padding: 0.25rem;
+
+  h2 {
+    margin-bottom: 0.25rem;
+  }
+
+  textarea {
+    width: 100%;
+    background-color: #303030;
+    color: white;
+    padding: 0.25rem;
+    min-height: 100px;
+  }
+}
+
+.snippet {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 0.25rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.snippet__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.snippet__body {
+  width: 100%;
+}
+
+.snippet_run-icon {
+  width: auto;
+  height: 80%;
+}
+
+.snippet_expand-collapse {
+  width: auto;
+  height: 50%;
+}

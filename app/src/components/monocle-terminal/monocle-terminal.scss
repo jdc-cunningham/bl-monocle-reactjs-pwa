@@ -7,6 +7,7 @@
   width: 100%;
   margin-top: 1rem;
   padding: 0.25rem;
+  border-radius: 4px;
 }
 
 .MonocleTerminal__top,
@@ -39,10 +40,10 @@
 }
 
 .MonocleTerminal__top-row-connection-indicator {
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: yellow;
-  border-radius: 0.25rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: orange;
+  border-radius: 0.4rem;
 }
 
 .MonocleTerminal__top-row-connection-indicator.connected {

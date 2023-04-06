@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './assets/styles/App.css';
 import { ensureConnected } from './bluetooth/js/main';
 import { sendPythonLines } from './utils/comms';
+import Snippets from './components/snippets/snippets';
 import MonocleTerminal from './components/monocle-terminal/monocle-terminal';
 
 function App() {
@@ -51,25 +52,9 @@ function App() {
     <div className="App">
       <div className="container">
         <div className="container__left">
-          <div className="snippets">
-            <div className="snippet">
-              <span>
-                <button
-                  type="button"
-                  className="run"
-                  disabled={writing}
-                  onClick={() => {}}
-                >run</button>
-              </span>
-              <textarea
-                className="body"
-                id="white"
-                value={snippet.join('\n')}
-                onChange={(e) => setSnippet(e.target.value)}
-                spellCheck={false}
-              ></textarea>
-            </div>
-          </div>
+          <Snippets
+            writing={writing}
+          />
           <MonocleTerminal
             connected={connected}
             writing={writing}

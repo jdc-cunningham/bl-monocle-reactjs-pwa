@@ -37,8 +37,12 @@ h3 {
   width: 100%;
 }
 
-.container__left, .container__right {
-  width: 50%;
+.container__left {
+  width: 40%;
+}
+
+.container__right {
+  width: 60%;
 }
 
 .snippet span {

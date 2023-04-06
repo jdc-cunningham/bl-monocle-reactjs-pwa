@@ -16,12 +16,6 @@ function App() {
     storage: 0,
   });
 
-  const [snippet, setSnippet] = useState([
-    'import display',
-    'display.text("White text line", 0, 0, 0xffffff)',
-    'display.show()',
-  ]);
-
   // this msg str is not clean, it can include those black diamond question marks
   // tried to clean it, wouldn't work eg. remove/keep only ascii 0-127
   // in the case where it's not clean I used indexOf

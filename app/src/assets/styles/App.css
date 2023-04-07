@@ -6,6 +6,14 @@ h3 {
   font-size: 1rem;
 }
 
+.row {
+  flex-direction: row;
+}
+
+.col {
+  flex-direction: column;
+}
+
 .App {
   position: absolute;
   top: 0;

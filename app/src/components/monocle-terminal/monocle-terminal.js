@@ -18,13 +18,16 @@ const MonocleTerminal = (props) => {
         <div className="MonocleTerminal__top-row">
           <h2>Monocle info</h2>
           <div className="MonocleTerminal__top-row-connection">
-            <button type="button" onClick={() => ensureConnected(logger)}>{connected ? 'connected' : 'connect'}</button>
+            <button type="button" onClick={() => ensureConnected(logger)} disabled={connected}>{connected ? 'connected' : 'connect'}</button>
             <div className={`MonocleTerminal__top-row-connection-indicator ${connected ? 'connected' : ''}`}></div>
           </div>
         </div>
         <div className="MonocleTerminal__top-row info">
           <h3>Firmware version: {monocleInfo.firmware}</h3>
-          <h3>Used storage: {monocleInfo.storageUsed}/{monocleInfo.storage} bytes</h3>
+          <span className="col">
+            <h3>Storage: {Math.floor(monocleInfo.storageUsed/1000)}/{Math.floor(monocleInfo.storage / 1000)} kb</h3>
+            <h3>Batt: {monocleInfo.battery || 100}%</h3>
+          </span>
         </div>
       </div>
       <div className="MonocleTerminal__body">

@@ -35,7 +35,7 @@ function App() {
         [
           'import device',
           'import gc',
-          'print("_m_info_" + device.VERSION + "_" + str(gc.mem_free()) + "_m_info_")',
+          'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_")',
         ],
         setWriting
       )
@@ -53,14 +53,14 @@ function App() {
       ...prevState
     ]);
 
-    if (cleanMsg.indexOf('_m_info_') !== -1) {
-      const mInfo = cleanMsg.split('_m_info_');
-      const mInfoParts = mInfo[1].split('_');
+    if (cleanMsg.indexOf('_m_') !== -1) {
+      const mInfo = cleanMsg.split('_m_');
 
       setMonocleInfo(prevState => ({
         ...prevState,
-        firmware: mInfoParts[0],
-        storage: mInfoParts[1]
+        firmware: mInfo[1],
+        storage: mInfo[2],
+        battery: mInfo[3]
       }));
     }
   }

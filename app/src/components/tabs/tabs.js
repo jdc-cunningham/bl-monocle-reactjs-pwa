@@ -5,7 +5,7 @@ const Tabs = (props) => {
 
   return (
     <div className="Tabs">
-      {tabs.map(tab => <div className={`Tabs__tab ${activeTab === tab ? 'active' : ''}`}>{tab}</div>)}
+      {tabs.map((tab, index) => <div key={index} className={`Tabs__tab ${activeTab === tab ? 'active' : ''}`}>{tab}</div>)}
     </div>
   );
 }

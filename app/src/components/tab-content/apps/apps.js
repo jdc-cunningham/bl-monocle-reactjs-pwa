@@ -21,8 +21,8 @@ const Apps = () => {
 
   return (
     <div className="TabContent__Apps">
-      {apps.map(app =>
-        <div className="TabContent__app">
+      {apps.map((app, index) =>
+        <div key={index} className="TabContent__app">
           <img src={app.icon} alt="app icon"/>
           <h4>{app.name}</h4>
         </div>

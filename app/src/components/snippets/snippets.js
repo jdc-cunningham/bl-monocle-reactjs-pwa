@@ -39,6 +39,23 @@ const Snippets = (props) => {
     }
   }
 
+  const updateSnippet = (id, content) => {
+    const updatedSnippets = [];
+
+    snippets.forEach(snippet => {
+      if (snippet.id === id) {
+        updatedSnippets.push({
+          ...snippet,
+          content: content,
+        });
+      } else {
+        updatedSnippets.push(snippet)
+      }
+    });
+
+    setSnippets(updatedSnippets);
+  }
+
   useEffect(() => {
     if (snippets.length) {
       saveToLocalStorage();
@@ -93,7 +110,7 @@ const Snippets = (props) => {
           </span>
         </div>
         <div className="snippet__body">
-          <textarea onChange={(e) => {}} value={snippet.content.join('\n')}/>
+          <textarea onChange={(e) => {updateSnippet(snippet.id, e.target.value.split('\n'))}} value={snippet.content.join('\n')}/>
         </div>
       </div>
     ));

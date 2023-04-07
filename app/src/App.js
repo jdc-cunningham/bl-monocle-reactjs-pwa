@@ -10,7 +10,7 @@ import Apps from './components/tab-content/apps/apps';
 function App() {
   const [connected, setConnected] = useState(false);
   const [writing, setWriting] = useState(false);
-  const [monocleHistory, setMonocleHistory] = useState(['Monocle logs']);
+  const [monocleHistory, setMonocleHistory] = useState([]);
   const [activeTab, setActiveTab] = useState('Apps');
   const tabs = ['Apps', 'File View', 'Emulator', 'Combined Snippets'];
 
@@ -49,8 +49,8 @@ function App() {
     const cleanMsg = msg.replace('relay: OK' , '');
 
     setMonocleHistory(prevState => [
-      ...prevState,
-      cleanMsg
+      cleanMsg,
+      ...prevState
     ]);
 
     if (cleanMsg.indexOf('_m_info_') !== -1) {
@@ -72,6 +72,9 @@ function App() {
           <Snippets
             writing={writing}
             setWriting={setWriting}
+            ensureConnected={ensureConnected}
+            logger={logger}
+            connected={connected}
           />
           <MonocleTerminal
             connected={connected}

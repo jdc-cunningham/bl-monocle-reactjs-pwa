@@ -8,10 +8,11 @@ import { sendPythonLines } from '../../utils/comms';
 import { writeToMonocle } from '../../utils/persistence_writer';
 
 const Snippets = (props) => {
-  const { writing, setWriting } = props;
+  const { writing, setWriting, ensureConnected, logger, connected } = props;
 
   const [snippets, setSnippets] = useState({});
   const [newSnippetFilename, setNewSnippetFilename] = useState("");
+  const [postConnectRun, setPostConnectRun] = useState({});
 
   const saveToLocalStorage = () => {
     localStorage.setItem('monocle-snippets', JSON.stringify(snippets))
@@ -50,18 +51,36 @@ const Snippets = (props) => {
     }));
   }
 
-  const runOnMonocle = () => {
-    // sendPythonLines(
-    //   snippets[],
-    //   setWriting
-    // );
+  const runOnMonocle = (snippetId) => {
+    if (!connected) {
+      ensureConnected(logger);
+      setPostConnectRun({
+        content: snippets[snippetId].content,
+        setWriting,
+      })
+    } else {
+      sendPythonLines(
+        snippets[snippetId].content,
+        setWriting
+      );
+    }
   }
+
+  useEffect(() => {
+    if (connected && Object.keys(postConnectRun).length) {
+      sendPythonLines(
+        postConnectRun.content,
+        postConnectRun.setWriting
+      );
+      setPostConnectRun({});
+    }
+  }, [connected, postConnectRun]);
 
   useEffect(() => {
     if (Object.keys(snippets).length) {
       saveToLocalStorage();
     }
-  }, [snippets]);
+  }, [snippets, saveToLocalStorage]);
 
   useEffect(() => {
     const localSnippets = localStorage.getItem('monocle-snippets');

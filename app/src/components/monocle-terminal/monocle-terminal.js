@@ -28,7 +28,7 @@ const MonocleTerminal = (props) => {
         </div>
       </div>
       <div className="MonocleTerminal__body">
-        <textarea readOnly={true} value={monocleHistory.join('\n')} onChange={(e) => {console.log(e.target.value)}}/>
+        <textarea readOnly={true} value={monocleHistory.join('\n')} onChange={(e) => {console.log(e.target.value)}} placeholder="Monocle logs"/>
       </div>
     </div>
   );

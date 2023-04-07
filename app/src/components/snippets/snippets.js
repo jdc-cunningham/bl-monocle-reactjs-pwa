@@ -42,11 +42,11 @@ const Snippets = (props) => {
     }
   }
 
-  const updateSnippet = (id, content) => {
+  const updateSnippet = (snippetId, content) => {
     setSnippets(prevState => ({
       ...prevState,
-      [id]: {
-        ...prevState[id],
+      [snippetId]: {
+        ...prevState[snippetId],
         content: content
       }
     }));
@@ -65,6 +65,20 @@ const Snippets = (props) => {
         setWriting
       );
     }
+  }
+
+  const toggleSnippet = (snippetId) => {
+    setSnippets(prevState => ({
+      ...prevState,
+      [snippetId]: {
+        ...prevState[snippetId],
+        collapsed: !prevState[snippetId].collapsed
+      }
+    }));
+  }
+
+  const uploadToMonocle = () => {
+    
   }
 
   useEffect(() => {
@@ -142,7 +156,7 @@ const Snippets = (props) => {
               <button type="button" disabled={writing} title="run snippet on monocle" onClick={() => runOnMonocle(snippetId)}>
                 <img src={PlayIcon} className="snippet_run-icon" alt="play icon"/>
               </button>
-              <button type="button" title={snippet.collapsed ? 'open' : 'close'}>
+              <button className="expand-collapse" type="button" title={snippet.collapsed ? 'open' : 'close'} onClick={() => toggleSnippet(snippetId)}>
                 <img src={UpIcon} alt="expand collapse icon" className={`snippet_expand-collapse ${snippet.collapsed ? 'collapsed' : ''}`}/>
               </button>
             </span>
@@ -166,7 +180,7 @@ const Snippets = (props) => {
           </button>
         </span>
         <span>
-          <button type="button" className="Snippets__run-selected" title="save to monocle" onClick={() => {}}>
+          <button type="button" className="Snippets__run-selected" title="save to monocle" onClick={() => uploadToMonocle}>
             Upload selected
               <img src={PlayIcon} className="snippet_run-icon" alt="play icon"/>
           </button>

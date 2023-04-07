@@ -35,6 +35,16 @@
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
+
+  &.closed {
+    button.expand-collapse img {
+      transform: rotate(180deg);
+    }
+
+    textarea {
+      display: none;
+    }
+  }
 }
 
 .snippet__top {

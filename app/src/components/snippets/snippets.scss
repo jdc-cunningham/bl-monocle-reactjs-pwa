@@ -74,11 +74,18 @@
 
 .Snippets__new-snippet-span {
   display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: space-between;
   flex-direction: row;
   width: 100%;
   margin-top: 0.5rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-direction: row;
+  }
 
   input {
     background-color: #303030;
@@ -98,7 +105,7 @@
   justify-content: center;
   flex-direction: row;
   padding: 0.25rem;
-  font-size: 1rem;
+  font-size: 0.85rem;
   margin-left: 0.5rem;
 }
 
@@ -106,4 +113,19 @@
   width: 0.85rem;
   height: 0.85rem;
   margin-right: 0.25rem;
+}
+
+.Snippets__run-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+
+  img {
+    width: auto;
+    height: 1rem;
+    margin-left: 0.5rem;
+  }
 }

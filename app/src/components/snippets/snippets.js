@@ -23,7 +23,7 @@ const Snippets = (props) => {
         id: Date.now(),
         filename: newSnippetFilename.replace('.py', '') + ".py",
         content: [],
-        selected: false,
+        selected: true,
         running: false,
         collapsed: false
       }
@@ -61,7 +61,7 @@ const Snippets = (props) => {
             'display.text("main", 0, 0, 0xffffff)',
             'display.show()'
           ],
-          selected: false,
+          selected: true,
           running: false,
           collapsed: false
         }
@@ -74,7 +74,7 @@ const Snippets = (props) => {
       <div key={index} className={`snippet ${snippet.collapsed ? 'closed' : ''}`}>
         <div className="snippet__top">
           <span>
-            <input type="checkbox" selected={snippet.selected}/>
+            <input type="checkbox" onChange={(e) => {}} defaultChecked={snippet.selected}/>
             {snippet.filename}
           </span>
           <span>
@@ -102,11 +102,19 @@ const Snippets = (props) => {
     <div className="Snippets">
       <h2>Snippets</h2>
       <span className="Snippets__new-snippet-span">
-        <input type="text" className="Snippets__new-snippet-filename" value={newSnippetFilename} placeholder="filename" onChange={(e) => setNewSnippetFilename(e.target.value)}/>
-        <button className="Snippets__new-snippet-btn" type="button" title="new snippet" onClick={() => addNewSnippet()}>
-          <img className="Snippets__new-snippet-btn-icon" src={PlusIcon} alt="add snippet icon"/>
-          Add
-        </button>
+        <span>
+          <input type="text" className="Snippets__new-snippet-filename" value={newSnippetFilename} placeholder="filename" onChange={(e) => setNewSnippetFilename(e.target.value)}/>
+          <button className="Snippets__new-snippet-btn" type="button" title="new snippet" onClick={() => addNewSnippet()}>
+            <img className="Snippets__new-snippet-btn-icon" src={PlusIcon} alt="add snippet icon"/>
+            Add
+          </button>
+        </span>
+        <span>
+          <button type="button" className="Snippets__run-selected" title="run selected snippets">
+            Run selected
+            <img src={PlayIcon} className="snippet_run-icon" alt="play icon"/>
+          </button>
+        </span>
       </span>
       {snippets.length ? renderSnippets() : 'Checking for local snippets...'}
     </div>

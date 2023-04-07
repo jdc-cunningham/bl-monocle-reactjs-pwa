@@ -5,6 +5,7 @@ import { sendPythonLines } from './utils/comms';
 import Snippets from './components/snippets/snippets';
 import MonocleTerminal from './components/monocle-terminal/monocle-terminal';
 import Tabs from './components/tabs/tabs';
+import Apps from './components/tab-content/apps/apps';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -83,6 +84,7 @@ function App() {
         </div>
         <div className="container__right">
           <Tabs activeTab={activeTab} tabs={tabs} setActiveTab={setActiveTab}/>
+          {activeTab === 'Apps' && <Apps/>}
         </div>
       </div>
     </div>

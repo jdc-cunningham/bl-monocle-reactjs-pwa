@@ -4,11 +4,14 @@ import { ensureConnected } from './bluetooth/js/main';
 import { sendPythonLines } from './utils/comms';
 import Snippets from './components/snippets/snippets';
 import MonocleTerminal from './components/monocle-terminal/monocle-terminal';
+import Tabs from './components/tabs/tabs';
 
 function App() {
   const [connected, setConnected] = useState(false);
   const [writing, setWriting] = useState(false);
   const [monocleHistory, setMonocleHistory] = useState(['Monocle logs']);
+  const [activeTab, setActiveTab] = useState('Apps');
+  const tabs = ['Apps', 'File View', 'Emulator', 'Combined Snippets'];
 
   const [monocleInfo, setMonocleInfo] = useState({
     firmware: "0.0.0",
@@ -79,7 +82,7 @@ function App() {
           />
         </div>
         <div className="container__right">
-
+          <Tabs activeTab={activeTab} tabs={tabs} setActiveTab={setActiveTab}/>
         </div>
       </div>
     </div>

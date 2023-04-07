@@ -43,6 +43,11 @@ h3 {
 
 .container__right {
   width: 60%;
+  background-color: #505050;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  height: calc(100vh - 1rem);
 }
 
 .snippet span {

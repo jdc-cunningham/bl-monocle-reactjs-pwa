@@ -15,6 +15,7 @@ const Snippets = (props) => {
   const [postConnectRun, setPostConnectRun] = useState({});
 
   const saveToLocalStorage = () => {
+    console.log('save');
     localStorage.setItem('monocle-snippets', JSON.stringify(snippets))
   }
 
@@ -74,13 +75,13 @@ const Snippets = (props) => {
       );
       setPostConnectRun({});
     }
-  }, [connected, postConnectRun]);
+  }, [connected]);
 
   useEffect(() => {
     if (Object.keys(snippets).length) {
       saveToLocalStorage();
     }
-  }, [snippets, saveToLocalStorage]);
+  }, [snippets]);
 
   useEffect(() => {
     const localSnippets = localStorage.getItem('monocle-snippets');
@@ -96,6 +97,17 @@ const Snippets = (props) => {
             'import display',
             'display.text("main", 0, 0, 0xffffff)',
             'display.show()'
+          ],
+          selected: true,
+          running: false,
+          collapsed: false
+        },
+        [Date.now() + 5]: { // too fast uses same
+          filename: "list-files.py",
+          content: [
+            'import os',
+            'path = "/"',
+            'print(os.listdir(path))'
           ],
           selected: true,
           running: false,

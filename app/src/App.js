@@ -71,6 +71,7 @@ function App() {
         <div className="container__left">
           <Snippets
             writing={writing}
+            setWriting={setWriting}
           />
           <MonocleTerminal
             connected={connected}

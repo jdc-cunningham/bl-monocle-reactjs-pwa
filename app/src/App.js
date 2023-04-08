@@ -6,6 +6,7 @@ import Snippets from './components/snippets/snippets';
 import MonocleTerminal from './components/monocle-terminal/monocle-terminal';
 import Tabs from './components/tabs/tabs';
 import Apps from './components/tab-content/apps/apps';
+import { writeSnippetToFile } from './utils/persistence_writer';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -13,6 +14,8 @@ function App() {
   const [monocleHistory, setMonocleHistory] = useState([]);
   const [activeTab, setActiveTab] = useState('Apps');
   const tabs = ['Apps', 'File View', 'Emulator', 'Combined Snippets'];
+  const [filesToWrite, setFilesToWrite] = useState([]);
+  const [filesWritten, setFilesWritten] = useState([]);
 
   const [monocleInfo, setMonocleInfo] = useState({
     firmware: "0.0.0",
@@ -63,7 +66,52 @@ function App() {
         battery: mInfo[3]
       }));
     }
+
+    if (
+      cleanMsg.indexOf('invalid syntax') !== -1 ||
+      cleanMsg.indexOf('ValueError:') !== -1
+    ) {
+      alert('An error occurred, see Monocle logs');
+    }
   }
+
+  // this processes the snippets in order
+  // writes as files to monocle
+  // uses the writing state to make sure waiting till previous write
+  // finishes before writing more
+  const uploadToMonocle = (snippets) => {
+    const files = [];
+
+    Object.keys(snippets).forEach(snippetId => {
+      if (snippets[snippetId].selected) {
+        files.push(snippets[snippetId]);
+      }
+    });
+
+    setFilesToWrite(files);
+  }
+
+  const writeFiles = () => {
+    if (filesToWrite.length) {
+      writeSnippetToFile(filesToWrite[0], setWriting);
+    }
+  }
+
+  useEffect(() => {
+    if (!writing && filesToWrite) {
+      console.log('reduce', filesToWrite.length);
+      setFilesToWrite(prevState => ([
+        ...prevState.slice(1)
+      ]));
+    }
+  }, [writing]);
+
+  useEffect(() => {
+    // start process of writing to monocle
+    if (!filesWritten.length) {
+      writeFiles();
+    }
+  }, [filesToWrite]);
 
   return (
     <div className="App">
@@ -75,6 +123,7 @@ function App() {
             ensureConnected={ensureConnected}
             logger={logger}
             connected={connected}
+            uploadToMonocle={uploadToMonocle}
           />
           <MonocleTerminal
             connected={connected}

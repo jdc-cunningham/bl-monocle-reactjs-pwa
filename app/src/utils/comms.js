@@ -9,9 +9,12 @@ const writeToMonocle = async (replStr, setWriting) => {
 
 const filterPayload = (snippet, setWriting) => {
   // https://github.com/siliconwitchery/web-bluetooth-repl/blob/b13ade8c1aa9754e4a2ad917c2d227705c02ef7f/js/repl.js#L269
-  let string = '';
-  string = snippet.replaceAll('\r\n', '\r');
-  string = string.replaceAll('\n', '\r');
+  let string = snippet;
+
+  // if (snippet.indexOf('f = open') === -1) {
+    string = snippet.replaceAll('\r\n', '\r');
+    string = string.replaceAll('\n', '\r');
+  // }
 
   writeToMonocle(string, setWriting);
 }

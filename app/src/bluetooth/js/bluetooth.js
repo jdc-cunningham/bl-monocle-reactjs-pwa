@@ -103,7 +103,7 @@ export async function connect(statusCallbackArg) {
     return Promise.resolve("repl connected");
 }
 
-export async function disconnect() {
+export async function disconnect(statusCallback) {
 
     if (device && device.gatt.connected) {
         await device.gatt.disconnect();
@@ -113,7 +113,8 @@ export async function disconnect() {
     clearInterval(replTxTaskIntervalId);
 
     // Callback to main.js
-    onDisconnect();
+    // this does not work, statusCallback undefined, have to propogate reference to main app somehow
+    onDisconnect(statusCallback);
 }
 
 function receiveNordicDfuControlData(event) {

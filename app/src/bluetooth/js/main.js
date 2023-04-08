@@ -15,10 +15,10 @@ export async function ensureConnected(statusCallback) {
 
             await startNordicDFU()
                 .catch(() => {
-                    disconnect();
+                    disconnect(statusCallback);
                     throw ("Bluetooth error. Reconnect or check console for details");
                 });
-            disconnect();
+            disconnect(statusCallback);
         }
 
         if (connectionResult === "repl connected") {
@@ -48,6 +48,8 @@ export function onDisconnect(statusCallback) {
     // if (infoText.innerHTML.includes("Reconnect")) {
     //     return;
     // }
+    
+    console.log('disconnected');
 
-    statusCallback("Disconnected");
+    // statusCallback("Disconnected");
 }

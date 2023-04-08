@@ -8,7 +8,7 @@ import { sendPythonLines } from '../../utils/comms';
 import { writeToMonocle } from '../../utils/persistence_writer';
 
 const Snippets = (props) => {
-  const { writing, setWriting, ensureConnected, logger, connected } = props;
+  const { writing, setWriting, ensureConnected, logger, connected, uploadToMonocle } = props;
 
   const [snippets, setSnippets] = useState({});
   const [newSnippetFilename, setNewSnippetFilename] = useState("");
@@ -77,8 +77,14 @@ const Snippets = (props) => {
     }));
   }
 
-  const uploadToMonocle = () => {
-    
+  const toggleCheck = (snippetId) => {
+    setSnippets(prevState => ({
+      ...prevState,
+      [snippetId]: {
+        ...prevState[snippetId],
+        selected: !prevState[snippetId].selected
+      }
+    }));
   }
 
   useEffect(() => {
@@ -143,7 +149,7 @@ const Snippets = (props) => {
         <div key={snippetId} className={`snippet ${snippet.collapsed ? 'closed' : ''}`}>
           <div className="snippet__top">
             <span>
-              <input type="checkbox" onChange={(e) => {}} defaultChecked={snippet.selected}/>
+              <input type="checkbox" onChange={(e) => toggleCheck(snippetId)} defaultChecked={snippet.selected}/>
               {snippet.filename}
             </span>
             <span>
@@ -180,7 +186,7 @@ const Snippets = (props) => {
           </button>
         </span>
         <span>
-          <button type="button" className="Snippets__run-selected" title="save to monocle" onClick={() => uploadToMonocle}>
+          <button type="button" className="Snippets__run-selected" title="save to monocle" onClick={() => uploadToMonocle(snippets)} disabled={writing}>
             Upload selected
               <img src={PlayIcon} className="snippet_run-icon" alt="play icon"/>
           </button>

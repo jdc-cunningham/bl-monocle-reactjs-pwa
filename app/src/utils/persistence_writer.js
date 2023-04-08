@@ -30,8 +30,7 @@ const runGcCollect = (writing, setWriting) => {
         'import gc',
         'gc.collect()'
       ],
-      setWriting,
-      resolve
+      setWriting
     );
   });
 }
@@ -47,7 +46,7 @@ export const writeSnippetToFile = (snippet, setWriting) => {
 
   snippet.content.forEach(line => {
     newFileLines.push(
-      `f.write('${line}\n')`
+      `f.write('${line}|nl|')` // dumb, issues with stripping the right )\n
     );
   });
 
@@ -64,9 +63,9 @@ export const writeSnippetToFile = (snippet, setWriting) => {
 // everytime this function runs it will clear code that is on the monocle
 // this uses polling to wait for the previous write command to finish before
 // attempting to write more
-export const writeToMonocle = async (snippets, setWriting, writing) => {
-  console.log('write');
-  await runGcCollect(writing, setWriting);
-  // const snippetIds = Object.keys(snippets);
+// export const writeToMonocle = async (snippets, setWriting, writing) => {
+//   console.log('write');
+//   await runGcCollect(writing, setWriting);
+//   // const snippetIds = Object.keys(snippets);
   
-}
+// }

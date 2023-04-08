@@ -98,8 +98,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!writing && filesToWrite) {
-      console.log('reduce', filesToWrite.length);
+    if (!writing && filesToWrite.length) {
       setFilesToWrite(prevState => ([
         ...prevState.slice(1)
       ]));

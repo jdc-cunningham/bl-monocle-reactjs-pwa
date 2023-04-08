@@ -5,7 +5,6 @@ import UpIcon from '../../assets/icons/uxwing_chevron-up.svg';
 import CloseIcon from '../../assets/icons/uxwing_close.svg';
 import PlusIcon from '../../assets/icons/uxwing_plus.svg';
 import { sendPythonLines } from '../../utils/comms';
-import { writeToMonocle } from '../../utils/persistence_writer';
 
 const Snippets = (props) => {
   const { writing, setWriting, ensureConnected, logger, connected, uploadToMonocle } = props;

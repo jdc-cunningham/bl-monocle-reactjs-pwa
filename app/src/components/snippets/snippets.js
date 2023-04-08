@@ -167,7 +167,7 @@ const Snippets = (props) => {
             </span>
           </div>
           <div className="snippet__body">
-            <textarea onChange={(e) => {updateSnippet(snippetId, e.target.value.split('\n'))}} value={snippet.content.join('\n')}/>
+            <textarea spellCheck={false} onChange={(e) => {updateSnippet(snippetId, e.target.value.split('\n'))}} value={snippet.content.join('\n')}/>
           </div>
         </div>
       );

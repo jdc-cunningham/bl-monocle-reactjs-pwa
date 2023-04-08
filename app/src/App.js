@@ -88,7 +88,7 @@ function App() {
       }
     });
 
-    setFilesToWrite(files);
+    setFilesToWrite(files.reverse()); // write modules first then main
   }
 
   const writeFiles = () => {

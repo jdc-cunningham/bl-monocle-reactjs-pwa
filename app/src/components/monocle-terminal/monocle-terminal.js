@@ -23,7 +23,7 @@ const MonocleTerminal = (props) => {
           </div>
         </div>
         <div className="MonocleTerminal__top-row info">
-          <h3>Firmware version: {monocleInfo.firmware}</h3>
+          <h3>Firmware: {monocleInfo.firmware}</h3>
           <span className="col">
             <h3>Free RAM: {Math.floor(monocleInfo.ram / 1000)} kb</h3>
             <h3>Free Storage: {Math.floor(monocleInfo.storage / 1000)} kb</h3>

@@ -56,6 +56,7 @@ h3 {
   margin-left: 0.5rem;
   border-radius: 4px;
   height: calc(100vh - 1rem);
+
 }
 
 .snippet span {
@@ -89,4 +90,22 @@ h3 {
   background-color: #505050;
   color: white;
   padding: 0.25rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .container__left {
+    width: 100%;
+  }
+
+  .Snippets {
+    max-height: 66vh;
+  }
+
+  .Snippets__new-snippet-filename {
+    width: 130px;
+  }
+
+  .container__right { /* currently not really useful */
+    display: none;
+  }
 }

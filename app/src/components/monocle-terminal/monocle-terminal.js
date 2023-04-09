@@ -25,7 +25,8 @@ const MonocleTerminal = (props) => {
         <div className="MonocleTerminal__top-row info">
           <h3>Firmware version: {monocleInfo.firmware}</h3>
           <span className="col">
-            <h3>Storage: {Math.floor(monocleInfo.storageUsed/1000)}/{Math.floor(monocleInfo.storage / 1000)} kb</h3>
+            <h3>Free RAM: {Math.floor(monocleInfo.ram / 1000)} kb</h3>
+            <h3>Free Storage: {Math.floor(monocleInfo.storage / 1000)} kb</h3>
             <h3>Batt: {monocleInfo.battery || 100}%</h3>
           </span>
         </div>

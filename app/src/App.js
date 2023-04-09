@@ -7,6 +7,7 @@ import MonocleTerminal from './components/monocle-terminal/monocle-terminal';
 import Tabs from './components/tabs/tabs';
 import Apps from './components/tab-content/apps/apps';
 import { writeSnippetToFile } from './utils/persistence_writer';
+import { get_storage } from './mpython-snippets/get_storage';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -36,9 +37,11 @@ function App() {
       // print to get response string
       sendPythonLines(
         [
+          'from os import statvfs',
           'import device',
           'import gc',
-          'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_")',
+          get_storage(),
+          'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_" + get_storage() + "_m_")',
         ],
         setWriting
       )
@@ -62,8 +65,9 @@ function App() {
       setMonocleInfo(prevState => ({
         ...prevState,
         firmware: mInfo[1],
-        storage: mInfo[2],
-        battery: mInfo[3]
+        ram: mInfo[2],
+        battery: mInfo[3],
+        storage: mInfo[4]
       }));
     }
 

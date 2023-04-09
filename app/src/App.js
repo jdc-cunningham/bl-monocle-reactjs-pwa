@@ -20,9 +20,34 @@ function App() {
 
   const [monocleInfo, setMonocleInfo] = useState({
     firmware: "0.0.0",
-    storageUsed: 0,
+    ram: 0,
     storage: 0,
   });
+
+  // info such as battery, storage, ram levels
+  const getDeviceInfo = () => {
+    // get device info
+    // print to get response string
+    if (monocleInfo.storage === 0) {
+      sendPythonLines(
+        [
+          'import os',
+          'import device',
+          'import gc',
+          get_storage(),
+          'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_" + get_storage() + "_m_")',
+        ],
+        setWriting
+      )
+    } else { // already imported
+      sendPythonLines(
+        [
+          'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_" + get_storage() + "_m_")',
+        ],
+        setWriting
+      )
+    }
+  }
 
   // this msg str is not clean, it can include those black diamond question marks
   // tried to clean it, wouldn't work eg. remove/keep only ascii 0-127
@@ -32,19 +57,7 @@ function App() {
 
     if (msg === 'Connected') {
       setConnected(true);
-
-      // get device info
-      // print to get response string
-      sendPythonLines(
-        [
-          'from os import statvfs',
-          'import device',
-          'import gc',
-          get_storage(),
-          'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_" + get_storage() + "_m_")',
-        ],
-        setWriting
-      )
+      getDeviceInfo();
     }
 
     // monocle is done processing
@@ -100,6 +113,14 @@ function App() {
       writeSnippetToFile(filesToWrite[0], setWriting);
     }
   }
+
+  useEffect(() => {
+    if (connected) {
+      setTimeout(() => {
+        getDeviceInfo();
+      }, 30000);
+    }
+  }, [monocleInfo]);
 
   useEffect(() => {
     if (!writing && filesToWrite.length) {

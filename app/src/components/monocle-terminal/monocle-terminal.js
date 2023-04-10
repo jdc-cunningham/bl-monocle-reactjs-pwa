@@ -7,7 +7,7 @@ const MonocleTerminal = (props) => {
     writihng,
     sendPythonLines,
     ensureConnected,
-    logger,
+    monocle_messaging,
     monocleHistory,
     monocleInfo
   } = props;
@@ -18,7 +18,7 @@ const MonocleTerminal = (props) => {
         <div className="MonocleTerminal__top-row">
           <h2>Monocle info</h2>
           <div className="MonocleTerminal__top-row-connection">
-            <button type="button" onClick={() => ensureConnected(logger)} disabled={connected}>{connected ? 'connected' : 'connect'}</button>
+            <button type="button" onClick={() => ensureConnected(monocle_messaging)} disabled={connected}>{connected ? 'connected' : 'connect'}</button>
             <div className={`MonocleTerminal__top-row-connection-indicator ${connected ? 'connected' : ''}`}></div>
           </div>
         </div>

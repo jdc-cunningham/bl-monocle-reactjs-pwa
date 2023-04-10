@@ -7,7 +7,7 @@ import PlusIcon from '../../assets/icons/uxwing_plus.svg';
 import { sendPythonLines } from '../../utils/comms';
 
 const Snippets = (props) => {
-  const { writing, setWriting, ensureConnected, logger, connected, uploadToMonocle } = props;
+  const { writing, setWriting, ensureConnected, monocle_messaging, connected, uploadToMonocle } = props;
 
   const [snippets, setSnippets] = useState({});
   const [newSnippetFilename, setNewSnippetFilename] = useState("");
@@ -53,7 +53,7 @@ const Snippets = (props) => {
 
   const runOnMonocle = (snippetId) => {
     if (!connected) {
-      ensureConnected(logger);
+      ensureConnected(monocle_messaging);
       setPostConnectRun({
         content: snippets[snippetId].content,
         setWriting,

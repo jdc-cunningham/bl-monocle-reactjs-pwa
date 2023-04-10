@@ -8,6 +8,7 @@ import Tabs from './components/tabs/tabs';
 import Apps from './components/tab-content/apps/apps';
 import { writeSnippetToFile } from './utils/persistence_writer';
 import { get_storage } from './mpython-snippets/get_storage';
+import { getHnTopArticleComments } from './web-apis/hn/hn';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -23,6 +24,20 @@ function App() {
     ram: 0,
     storage: 0,
   });
+
+  // intercept console.log specifically for disconnected message from bluetooth
+  // https://stackoverflow.com/a/6455713/2710227
+  (function(){
+
+    var originallog = console.log;
+
+    console.log = function(txt) {
+      if (txt === 'disconnected') {
+        setConnected(false);
+      }
+      originallog.apply(console, arguments);
+    }
+  })();
 
   // info such as battery, storage, ram levels
   const getDeviceInfo = () => {
@@ -42,6 +57,7 @@ function App() {
     } else { // already imported
       sendPythonLines(
         [
+          'gc.collect()', // important to reduce ram usage building up
           'print("_m_" + device.VERSION + "_m_" + str(gc.mem_free()) + "_m_" + str(device.battery_level()) + "_m_" + get_storage() + "_m_")',
         ],
         setWriting
@@ -49,16 +65,33 @@ function App() {
     }
   }
 
+  const getHnArticles = async () => {
+    const articles = await getHnTopArticleComments();
+    const articleCommentPairs = [];
+
+    // process into array of title:comment pairs to send to monocle
+    Object.keys(articles).forEach(articleId => {
+      articleCommentPairs.push({
+        title: articles[articleId].title,
+        comment: articles[articleId].comment 
+      })
+    });
+
+    // send to monocle
+    sendPythonLines(
+      [
+        // `load_json_data(${JSON.stringify(articleCommentPairs)}, data_arr)`
+        `load_json_data(${JSON.stringify([{title: "title", comment: "comment"}])}, data_arr)`
+      ],
+      setWriting
+    )
+  }
+
   // this msg str is not clean, it can include those black diamond question marks
   // tried to clean it, wouldn't work eg. remove/keep only ascii 0-127
   // in the case where it's not clean I used indexOf
-  const logger = async (msg) => {
+  const monocle_messaging = async (msg) => {
     console.log('from monocle:', msg);
-
-    if (msg === 'Connected') {
-      setConnected(true);
-      getDeviceInfo();
-    }
 
     // monocle is done processing
     if (msg.indexOf('relay: OK') !== -1) {
@@ -72,6 +105,11 @@ function App() {
       ...prevState
     ]);
 
+    if (cleanMsg === 'Connected') {
+      setConnected(true);
+      getDeviceInfo();
+    }
+
     if (cleanMsg.indexOf('_m_') !== -1) {
       const mInfo = cleanMsg.split('_m_');
 
@@ -82,6 +120,10 @@ function App() {
         battery: mInfo[3],
         storage: mInfo[4]
       }));
+    }
+
+    if (cleanMsg.indexOf('get_hn_articles') !== -1) {
+      getHnArticles();
     }
 
     if (
@@ -145,7 +187,7 @@ function App() {
             writing={writing}
             setWriting={setWriting}
             ensureConnected={ensureConnected}
-            logger={logger}
+            monocle_messaging={monocle_messaging}
             connected={connected}
             uploadToMonocle={uploadToMonocle}
           />
@@ -154,7 +196,7 @@ function App() {
             writing={writing}
             sendPythonLines={sendPythonLines}
             ensureConnected={ensureConnected}
-            logger={logger}
+            monocle_messaging={monocle_messaging}
             monocleHistory={monocleHistory}
             monocleInfo={monocleInfo}
           />

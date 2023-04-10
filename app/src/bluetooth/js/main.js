@@ -31,7 +31,10 @@ export async function ensureConnected(statusCallback) {
         if (error.message && error.message.includes("cancelled")) {
             return;
         }
-        statusCallback(JSON.stringify(error));
+
+        if (statusCallback) {
+            statusCallback(JSON.stringify(error));
+        }
         console.error(error);
     }
 }

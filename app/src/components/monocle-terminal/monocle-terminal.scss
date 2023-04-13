@@ -1,0 +1,70 @@
+.MonocleTerminal {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #505050;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+
+.MonocleTerminal__top,
+.MonocleTerminal__body {
+  width: 100%;
+}
+
+.MonocleTerminal__top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.MonocleTerminal__top-row.info {
+  align-items: flex-start;
+  margin-top: 0.25rem;
+}
+
+.MonocleTerminal__top-row.info h3 {
+  font-size: 0.85rem;
+}
+
+.MonocleTerminal__top-row-connection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.MonocleTerminal__top-row-connection button {
+  cursor: pointer;
+  margin-right: 0.25rem;
+}
+
+.MonocleTerminal__top-row-connection-indicator {
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: orange;
+  border-radius: 0.4rem;
+}
+
+.MonocleTerminal__top-row-connection-indicator.connected {
+  background-color: green;
+}
+
+.MonocleTerminal__body {
+  overflow-y: auto;
+}
+
+.MonocleTerminal__body textarea {
+  background-color: #303030;
+  color: white;
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+  width: 100%;
+  min-height: 150px;
+  cursor: default;
+}

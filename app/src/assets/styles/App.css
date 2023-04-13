@@ -1,0 +1,111 @@
+h2 {
+  font-size: 1.25rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.App {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #282828;
+  padding: 0.5rem;
+}
+
+.App span.connect {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+
+.App span.connect button {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+}
+
+.container__left {
+  width: 40%;
+}
+
+.container__right {
+  width: 60%;
+  background-color: #505050;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  height: calc(100vh - 1rem);
+
+}
+
+.snippet span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.run {
+  cursor: pointer;
+}
+
+.run:disabled {
+  opacity: 0.6;
+}
+
+.snippet {
+  background-color: #505050;
+  padding: 0.25rem;
+}
+
+.snippet:not(:first-of-type) {
+  margin-top: 0.5rem;
+}
+
+.snippet .body {
+  display: block;
+  min-height: 350px;
+  min-width: 650px;
+  white-space: pre-line;
+  background-color: #505050;
+  color: white;
+  padding: 0.25rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .container__left {
+    width: 100%;
+  }
+
+  .Snippets {
+    max-height: 66vh;
+  }
+
+  .Snippets__new-snippet-filename {
+    width: 130px;
+  }
+
+  .container__right { /* currently not really useful */
+    display: none;
+  }
+}

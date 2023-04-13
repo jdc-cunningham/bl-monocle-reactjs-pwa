@@ -1,0 +1,141 @@
+.Snippets {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #505050;
+  border-radius: 4px;
+  padding: 0.25rem;
+  overflow-y: auto;
+  max-height: 70vh;
+
+  h2 {
+    margin-bottom: 0.25rem;
+  }
+
+  textarea {
+    width: 100%;
+    background-color: #303030;
+    color: white;
+    padding: 0.25rem;
+    min-height: 100px;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.snippet {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 0.25rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &.closed {
+    button.expand-collapse img {
+      transform: rotate(180deg);
+    }
+
+    textarea {
+      display: none;
+    }
+  }
+}
+
+.snippet__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+
+  input[type="checkbox"] {
+    cursor: pointer;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.snippet__body {
+  width: 100%;
+}
+
+.snippet_run-icon {
+  width: auto;
+  height: 80%;
+}
+
+.snippet_expand-collapse {
+  width: auto;
+  height: 50%;
+}
+
+.Snippets__new-snippet-span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 0.5rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    flex-direction: row;
+  }
+
+  input {
+    background-color: #303030;
+    color: white;
+    border: 0;
+  }
+}
+
+.Snippets__new-snippet-filename {
+  padding: 0.25rem;
+  font-size: 1rem;
+}
+
+.Snippets__new-snippet-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  padding: 0.25rem;
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+}
+
+.Snippets__new-snippet-btn-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-right: 0.25rem;
+}
+
+.Snippets__run-selected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+
+  img {
+    width: auto;
+    height: 1rem;
+    margin-left: 0.5rem;
+  }
+}

@@ -1,0 +1,36 @@
+.TabContent__Apps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.TabContent__app {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: calc(100%/6 - 1rem);
+  margin: 0.5rem;
+  color: #000000;
+  cursor: pointer;
+  animation: all ease-in-out 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    background-color: white;
+    border-radius: 4px;
+    padding: 1rem;
+  }
+
+  h4 {
+    margin-top: 0.25rem;
+    font-size: 1rem;
+  }
+}

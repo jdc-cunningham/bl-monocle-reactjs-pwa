@@ -6,7 +6,7 @@ Still mostly conceptual since unsure how it will all work regarding what would m
 
 **NOTE** the whole right side does not work right now
 
-There is mobil support (basic responsive design)
+There is mobile support (basic responsive design)
 
 <img src="./monocle-web-editor.JPG"/>
 

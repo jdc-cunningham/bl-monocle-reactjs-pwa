@@ -4,6 +4,10 @@ This is a very basic web-editor that can combine scripts stored in local storage
 
 Still mostly conceptual since unsure how it will all work regarding what would make sense logic wise.
 
+**NOTE** the whole right side does not work right now
+
+There is mobil support (basic responsive design)
+
 <img src="./monocle-web-editor.JPG"/>
 
 ### Try it live

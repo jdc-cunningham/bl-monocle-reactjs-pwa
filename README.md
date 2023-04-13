@@ -6,6 +6,10 @@ Still mostly conceptual since unsure how it will all work regarding what would m
 
 <img src="./monocle-web-editor.JPG"/>
 
+### Try it live
+
+View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/">here</a>
+
 ### Disclaimer
 
 This does not have a linter (does not understand code). Also does not feature code highlighting.

@@ -12,7 +12,7 @@ View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-rea
 
 ### Check other branches
 
-Has differernt sample code
+Has different sample code
 
 ### Disclaimer
 

@@ -10,6 +10,20 @@ Still mostly conceptual since unsure how it will all work regarding what would m
 
 View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/">here</a>
 
+### Basic instructions
+
+- connect to your monocle
+- write python (mpython) as a snippet
+  - run single snippet (play icon)
+  - or write to flash
+    - need main.py
+    - separate file(s) for modules
+      - this does not completely work at this time
+
+### LocalStorage
+
+That's where the code snippets are stored as a basic stringified JSON object
+
 ### Check other branches
 
 Has different sample code

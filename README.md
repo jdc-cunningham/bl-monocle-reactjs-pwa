@@ -10,6 +10,10 @@ Still mostly conceptual since unsure how it will all work regarding what would m
 
 View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/">here</a>
 
+### Check other branches
+
+Has differernt sample code
+
 ### Disclaimer
 
 This does not have a linter (does not understand code). Also does not feature code highlighting.

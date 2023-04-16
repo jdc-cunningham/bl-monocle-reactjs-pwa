@@ -22,7 +22,7 @@ View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-rea
   - or write to flash
     - need main.py
     - separate file(s) for modules
-      - this does not completely work at this time
+      - this does not completely work at this time (needs new monocle firmware update)
 
 ### LocalStorage
 

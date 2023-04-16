@@ -8,6 +8,8 @@ Still mostly conceptual since unsure how it will all work regarding what would m
 
 There is mobile support (basic responsive design)
 
+**NOTE** the storage info below is wrong, that's RAM, reported storage is not correct on current monocle firmware, it's missing values.
+
 <img src="./monocle-web-editor.JPG"/>
 
 ### Try it live

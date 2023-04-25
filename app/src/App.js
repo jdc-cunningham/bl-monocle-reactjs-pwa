@@ -142,8 +142,16 @@ function App() {
     const files = [];
 
     Object.keys(snippets).forEach(snippetId => {
-      if (snippets[snippetId].selected) {
-        files.push(snippets[snippetId]);
+      const snippet = snippets[snippetId];
+
+      if (snippet.selected) {
+        if (snippet.content.join('').length > 127) {
+          // use linker approach to split up into smaller chunks
+          
+        
+        } else {
+          files.push(snippets[snippetId]);
+        }
       }
     });
 

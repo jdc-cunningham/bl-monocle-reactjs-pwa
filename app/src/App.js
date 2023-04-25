@@ -147,7 +147,7 @@ function App() {
       if (snippet.selected) {
         if (snippet.content.join('').length > 127) {
           // use linker approach to split up into smaller chunks
-          
+          alert('not sent');
         
         } else {
           files.push(snippets[snippetId]);

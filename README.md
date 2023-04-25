@@ -8,6 +8,8 @@ Still mostly conceptual since unsure how it will all work regarding what would m
 
 There is mobile support (basic responsive design)
 
+**NOTE** the storage info below is wrong, that's RAM, reported storage is not correct on current monocle firmware, it's missing values.
+
 <img src="./monocle-web-editor.JPG"/>
 
 ### Try it live
@@ -22,7 +24,7 @@ View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-rea
   - or write to flash
     - need main.py
     - separate file(s) for modules
-      - this does not completely work at this time
+      - this does not completely work at this time (needs new monocle firmware update)
 
 ### LocalStorage
 

@@ -19,6 +19,18 @@ const filterPayload = (snippet, setWriting) => {
     string = string.replaceAll('|nl|', '\\n');
   }
 
+  // if(string.indexOf('device.VERSION') === -1) {
+  //   console.log(string);
+  //   setWriting(true);
+  //   setTimeout(() => {
+  //     setWriting(false);
+  //   }, 1000);
+  // } else {
+  //   writeToMonocle(string, setWriting);
+  // }
+
+  // console.log(string);
+
   writeToMonocle(string, setWriting);
 }
 

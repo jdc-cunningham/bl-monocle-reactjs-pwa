@@ -143,12 +143,66 @@ function App() {
 
     Object.keys(snippets).forEach(snippetId => {
       const snippet = snippets[snippetId];
+      const snippetContent = snippet.content;
+      const filename = snippet.filename;
 
       if (snippet.selected) {
-        if (snippet.content.join('').length > 127) {
+        if (snippetContent.join('\n').length > 127) {
           // use linker approach to split up into smaller chunks
-          alert('not sent');
-        
+          // treat main file as a map to chunks/build it up and exec
+
+          const file_parts = [];
+
+          let chars = ''; // snippet lines counter
+          let nCount = snippetContent.length * 2; // \n
+
+          snippetContent.forEach((line, index) => {
+            if (line.length > 127) {
+              alert('Line is too long', line);
+              throw Error('stop write');
+            }
+
+            console.log(filename, nCount);
+
+            if ((chars.length + line.length) < (128  - nCount)) {
+              chars += line + '\n';
+            } else {
+              file_parts.push(chars.split('\n'));
+              chars = line;
+            }
+
+            if (index === snippetContent.length - 1) {
+              file_parts.push(chars.split('\n'));
+            }
+          });
+
+          file_parts.forEach((fp, index) => {
+            files.push({
+              filename: `${filename.replace('.py', '')}_${index}.py`,
+              content: fp,
+            });
+          });
+
+          // imported loader file
+          files.push({
+            filename,
+            content: (filename === 'main.py')
+              ? [
+                `l = ${file_parts.length}`,
+                'a = ""',
+                'for f in range(l):',
+                `  a = "|nl|".join(open(f"${filename.replace('.py', '')}_{f}.py").readlines())`,
+                'exec(a)'
+              ]
+              : [ // imports can be a problem unless globally available
+                'def run():',
+                `  l = ${file_parts.length}`,
+                '  a = ""',
+                '  for f in range(l):',
+                `    a = "|nl|".join(open(f"${filename.replace('.py', '')}_{f}.py").readlines())`,
+                '  exec(a)'
+              ]
+          });
         } else {
           files.push(snippets[snippetId]);
         }
@@ -167,7 +221,9 @@ function App() {
   useEffect(() => {
     if (connected) {
       setTimeout(() => {
-        getDeviceInfo();
+        if (!filesToWrite.length) {
+          getDeviceInfo();
+        }
       }, 30000);
     }
   }, [monocleInfo]);

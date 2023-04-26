@@ -19,6 +19,7 @@ const filterPayload = (snippet, setWriting) => {
     string = string.replaceAll('|nl|', '\\n');
   }
 
+  // alert('not writing to monocle');
   // if(string.indexOf('device.VERSION') === -1) {
   //   console.log(string);
   //   setWriting(true);

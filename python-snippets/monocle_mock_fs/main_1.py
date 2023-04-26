@@ -1,10 +1,7 @@
-time.sleep(3)
-intro.run()
+import reddit_reader
+import time
 
 time.sleep(3)
 
-intro.home()
-
-time.sleep(3)
-
-
+scenes.run()
+s_intro()

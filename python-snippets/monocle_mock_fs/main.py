@@ -1,10 +1,5 @@
-def run():
-  l = 3
-  a = ""
-  for f in range(l):
-    l = open("main.py_" + l + ".py").readlines()
-    a += l.join("\n")
-  print(a)
-  exec(a)
-
-run()
+l = 4
+a = ""
+for f in range(l):
+  a = "\n".join(open(f"main_{f}.py").readlines())
+exec(a)

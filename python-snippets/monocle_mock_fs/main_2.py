@@ -1,6 +1,8 @@
-hn_reader.run()
+time.sleep(3)
+s_home()
+
 time.sleep(3)
 
-reddit_reader.run()
+hn_reader.run()
 
-
+time.sleep(3)

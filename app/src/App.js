@@ -9,6 +9,7 @@ import Apps from './components/tab-content/apps/apps';
 import { writeSnippetToFile } from './utils/persistence_writer';
 import { get_storage } from './mpython-snippets/get_storage';
 import { getHnTopArticleComments } from './web-apis/hn/hn';
+import { getWorldNews } from './web-apis/reddit/reddit';
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -186,6 +187,10 @@ function App() {
       writeFiles();
     }
   }, [filesToWrite]);
+
+  useEffect(() => {
+    console.log(getWorldNews());
+  }, []);
 
   return (
     <div className="App">

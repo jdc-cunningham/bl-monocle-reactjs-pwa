@@ -188,10 +188,6 @@ function App() {
     }
   }, [filesToWrite]);
 
-  useEffect(() => {
-    console.log(getWorldNews());
-  }, []);
-
   return (
     <div className="App">
       <div className="container">

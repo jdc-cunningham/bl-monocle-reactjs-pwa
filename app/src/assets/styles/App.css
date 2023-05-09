@@ -46,10 +46,11 @@ h3 {
 }
 
 .container__left {
-  width: 40%;
+  width: 100%;
 }
 
 .container__right {
+  display: none;
   width: 60%;
   background-color: #505050;
   padding: 0.25rem;

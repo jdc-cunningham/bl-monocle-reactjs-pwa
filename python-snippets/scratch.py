@@ -94,13 +94,13 @@ def display_article(title, lines):
   y_pos = 24
 
   t = display.Text(f'{title} {count}/{article_count}', 0, 24, display.BLUE, justify=display.MIDDLE_LEFT)
-  l1 = display.Text(lines[0], 0, y_pos + 50, display.WHITE, justify=display.MIDDLE_LEFT) if 0 < len(lines) else []
-  l2 = display.Text(lines[1], 0, y_pos + 100, display.WHITE, justify=display.MIDDLE_LEFT) if 1 < len(lines) else []
-  l3 = display.Text(lines[2], 0, y_pos + 150, display.WHITE, justify=display.MIDDLE_LEFT) if 2 < len(lines) else []
-  l4 = display.Text(lines[3], 0, y_pos + 200, display.WHITE, justify=display.MIDDLE_LEFT) if 3 < len(lines) else []
-  l5 = display.Text(lines[4], 0, y_pos + 250, display.WHITE, justify=display.MIDDLE_LEFT) if 4 < len(lines) else []
-  l6 = display.Text(lines[5], 0, y_pos + 300, display.WHITE, justify=display.MIDDLE_LEFT) if 5 < len(lines) else []
-  l7 = display.Text(lines[6], 0, y_pos + 350, display.WHITE, justify=display.MIDDLE_LEFT) if 6 < len(lines) else []
+  l1 = display.Text(lines[0] if 0 < len(lines) else '', 0, y_pos + 50, display.WHITE, justify=display.MIDDLE_LEFT)
+  l2 = display.Text(lines[1] if 1 < len(lines) else '', 0, y_pos + 100, display.WHITE, justify=display.MIDDLE_LEFT)
+  l3 = display.Text(lines[2] if 2 < len(lines) else '', 0, y_pos + 150, display.WHITE, justify=display.MIDDLE_LEFT)
+  l4 = display.Text(lines[3] if 3 < len(lines) else '', 0, y_pos + 200, display.WHITE, justify=display.MIDDLE_LEFT)
+  l5 = display.Text(lines[4] if 4 < len(lines) else '', 0, y_pos + 250, display.WHITE, justify=display.MIDDLE_LEFT)
+  l6 = display.Text(lines[5] if 5 < len(lines) else '', 0, y_pos + 300, display.WHITE, justify=display.MIDDLE_LEFT)
+  l7 = display.Text(lines[6] if 6 < len(lines) else '', 0, y_pos + 350, display.WHITE, justify=display.MIDDLE_LEFT)
 
   last_displayed = [t, l1, l2, l3, l4, l5, l6, l7]
 

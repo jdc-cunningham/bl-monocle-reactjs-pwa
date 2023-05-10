@@ -81,7 +81,8 @@ function App() {
     // send to monocle
     sendPythonLines(
       [
-        `load_json_data(${JSON.stringify([{title: "title", comment: "comment"}])}, read_hn_articles)`
+        `load_json_data(${JSON.stringify(articleCommentPairs)})`,
+        'read_articles()'
       ],
       setWriting
     )
@@ -91,10 +92,14 @@ function App() {
     console.log('run rn');
     const news = await getWorldNews(3);
 
+    console.log(news);
+
     // send to monocle
     sendPythonLines(
       [
-        `load_json_data(${JSON.stringify(news)}, read_reddit_articles)`
+        `load_json_data(obj)`,
+        // `load_json_data(${{data: JSON.stringify(news)}})`,
+        'read_articles()'
       ],
       setWriting
     )

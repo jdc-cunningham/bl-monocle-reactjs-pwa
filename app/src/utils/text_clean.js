@@ -44,4 +44,5 @@ const decodeEntities = (function() {
   return decodeHTMLEntities;
 })()
 
+// |\W removes everything non alpha num including spaces
 export const cleanText = (str) => decodeEntities(stripHtml(removeLinks(str.replace(/(\r\n|\n|\r)/gm, ""))));

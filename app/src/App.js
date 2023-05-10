@@ -190,7 +190,7 @@ function App() {
     if (connected) {
       setTimeout(() => {
         getDeviceInfo();
-      }, 30000);
+      }, 60000);
     }
   }, [monocleInfo]);
 

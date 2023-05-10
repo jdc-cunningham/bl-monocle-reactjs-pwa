@@ -13,9 +13,12 @@ hn_ran = False
 def clear_display():
   global last_displayed
 
+  for item in last_displayed:
+    del(item)
+
   last_displayed = []
 
-  display.clear()
+  # display.clear()
   gc.collect()
 
 def load_json_data(data):
@@ -26,9 +29,15 @@ def load_json_data(data):
   article_count = len(data_store)
 
 def battery_level(battery_level, width = 75):
+  global last_displayed
+
   bl_p = display.Polyline([565, 0, 640, 0, 640, 24, 565, 24, 565, 0], display.WHITE, thickness=1)
   bl_l = display.Line(570, 12, 570 + int(battery_level * width), 12, display.GREEN, thickness=12)
   bl_m = display.Text(f'{int(battery_level * 67)}m', 640, 50, display.WHITE, justify=display.MIDDLE_RIGHT)
+
+  last_displayed.append(bl_p)
+  last_displayed.append(bl_l)
+  last_displayed.append(bl_m)
 
   return [bl_p, bl_l, bl_m]
 
@@ -37,12 +46,13 @@ def main_text(msg):
 
   mt_t = display.Text(msg, 65, 175, display.WHITE, justify=display.MIDDLE_LEFT)
 
-  last_displayed.append(mt_t)
+  if msg:
+    last_displayed.append(mt_t)
 
   return [mt_t] if msg else []
 
 def reddit_icon(active):
-  global ri_t, ri_bg
+  global ri_t, ri_bg, last_displayed
 
   ri_t = display.Text('Re', 0, 150, display.GREEN if active else display.WHITE, justify=display.MIDDLE_LEFT)
   ri_bg = display.Rectangle(0, 125, 50, 175, display.GRAY7)
@@ -52,6 +62,9 @@ def reddit_icon(active):
   if (active):
     d.append(ri_bg)
 
+  last_displayed.append(d[0])
+  if 1 < len(d) : last_displayed.append(d[1])
+
   return d
 
 def load_reddit_articles():
@@ -60,7 +73,7 @@ def load_reddit_articles():
   print('get_reddit_articles')
 
 def hn_icon(active):
-  global hi_t, hi_bg
+  global hi_t, hi_bg, last_displayed
 
   hi_t = display.Text('Hn', 0, 200, display.GREEN if active else display.WHITE, justify=display.MIDDLE_LEFT)
   hi_bg = display.Rectangle(0, 175, 50, 225, display.GRAY7)
@@ -69,6 +82,9 @@ def hn_icon(active):
 
   if (active):
     d.append(hi_bg)
+
+  last_displayed.append(d[0])
+  if 1 < len(d) : last_displayed.append(d[1])
 
   return d
 
@@ -103,8 +119,8 @@ def display_article(title, lines):
   l6 = display.Text(lines[5] if 5 < len(lines) else '                          ', 0, y_pos + 300, display.WHITE, justify=display.MIDDLE_LEFT)
   l7 = display.Text(lines[6] if 6 < len(lines) else '                          ', 0, y_pos + 350, display.WHITE, justify=display.MIDDLE_LEFT)
 
+  clear_display()
   last_displayed = [t, l1, l2, l3, l4, l5, l6, l7]
-
   display.show([t, l1, l2, l3, l4, l5, l6, l7])
 
 def read_articles():
@@ -113,17 +129,17 @@ def read_articles():
   title = article['title']
   comment = article['comment']
 
-  clear_display()
+
   display_article(title, comment)
   time.sleep(3)
   data_store.pop(0)
   
   if (len(data_store) > 0):
     count += 1
-    clear_display()
     read_articles()
   else:
     count = 0
+    data_store = []
     
     # next app, no async await
     if (not hn_ran):
@@ -133,9 +149,7 @@ def read_articles():
 
       time.sleep(3)
 
-      clear_display()
       load_hn_articles()
-
 
 # run app
 

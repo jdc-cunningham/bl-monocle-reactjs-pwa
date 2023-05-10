@@ -66,8 +66,8 @@ function App() {
     }
   }
 
-  const getHnArticles = async () => {
-    const articles = await getHnTopArticleComments();
+  const loadHnArticles = async () => {
+    const articles = await getHnTopArticleComments(3);
     const articleCommentPairs = [];
 
     // process into array of title:comment pairs to send to monocle
@@ -81,8 +81,19 @@ function App() {
     // send to monocle
     sendPythonLines(
       [
-        // `load_json_data(${JSON.stringify(articleCommentPairs)}, data_arr)`
-        `load_json_data(${JSON.stringify([{title: "title", comment: "comment"}])}, data_arr)`
+        `load_json_data(${JSON.stringify([{title: "title", comment: "comment"}])}, read_hn_articles)`
+      ],
+      setWriting
+    )
+  }
+
+  const loadRedditWorldNews = async () => {
+    const news = await getWorldNews(3);
+
+    // send to monocle
+    sendPythonLines(
+      [
+        `load_json_data(${JSON.stringify(news)}, read_reddit_articles)`
       ],
       setWriting
     )
@@ -124,7 +135,11 @@ function App() {
     }
 
     if (cleanMsg.indexOf('get_hn_articles') !== -1) {
-      getHnArticles();
+      loadHnArticles();
+    }
+
+    if (cleanMsg.indexOf('get_rn_articles') !== -1) {
+      loadRedditWorldNews();
     }
 
     if (

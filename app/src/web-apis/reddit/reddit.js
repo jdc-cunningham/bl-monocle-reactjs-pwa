@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { chunkText } from '../../utils/text_chunker';
+import { cleanText } from '../../utils/text_clean';
 
 const redditApiBase = 'https://www.reddit.com';
 const redditWorldNewsApi = 'https://www.reddit.com/r/worldnews/.json';
@@ -12,7 +14,7 @@ const getArticleComment = (permalink) => {
         const comments = res?.data[1].data.children;
   
         if (comments.length) {
-          resolve(comments[0].data.body);
+          resolve(chunkText(cleanText(comments[0].data.body)));
         } else {
           resolve("failed to get comment");
         }
@@ -28,7 +30,7 @@ const processArticles = async (articlesData, finalArticles, resolver) => {
     const { title, num_comments, permalink } = articlesData[0];
 
     const articleCommentPair = {
-      title,
+      title: `${title.substring(0, 18)}...`,
       comment: '',
     };
 
@@ -48,11 +50,11 @@ const processArticles = async (articlesData, finalArticles, resolver) => {
   }
 }
 
-export const getWorldNews = async () => {
+export const getWorldNews = async (limit = 5) => {
   return new Promise(resolve => {
     axios.get(redditWorldNewsApi)
       .then(res => {
-        const articles = res?.data?.data?.children.slice(0, 10);
+        const articles = res?.data?.data?.children.slice(0, limit);
         const articlesData = []; // sucks plural plural
         const finalArticles = [];
   

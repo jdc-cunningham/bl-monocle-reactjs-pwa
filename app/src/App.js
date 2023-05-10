@@ -88,6 +88,7 @@ function App() {
   }
 
   const loadRedditWorldNews = async () => {
+    console.log('run rn');
     const news = await getWorldNews(3);
 
     // send to monocle
@@ -138,7 +139,7 @@ function App() {
       loadHnArticles();
     }
 
-    if (cleanMsg.indexOf('get_rn_articles') !== -1) {
+    if (cleanMsg.indexOf('get_reddit_articles') !== -1) {
       loadRedditWorldNews();
     }
 

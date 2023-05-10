@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.2152ba5d.css",
-    "main.js": "./static/js/main.b88380d4.js",
+    "main.css": "./static/css/main.88d47a1c.css",
+    "main.js": "./static/js/main.e6fcb267.js",
     "static/js/787.c1112931.chunk.js": "./static/js/787.c1112931.chunk.js",
     "static/media/hn_icon.JPG": "./static/media/hn_icon.f3fa2055998741388adf.JPG",
     "static/media/reddit_icon.JPG": "./static/media/reddit_icon.3418f19f1b2aca0b2025.JPG",
@@ -11,12 +11,12 @@
     "index.html": "./index.html",
     "static/media/uxwing_chevron-up.svg": "./static/media/uxwing_chevron-up.cfc98f76c5330511488a5f6c36c41b61.svg",
     "static/media/uxwing_play.svg": "./static/media/uxwing_play.22b3b1534878793344b66ecbc3c1355e.svg",
-    "main.2152ba5d.css.map": "./static/css/main.2152ba5d.css.map",
-    "main.b88380d4.js.map": "./static/js/main.b88380d4.js.map",
+    "main.88d47a1c.css.map": "./static/css/main.88d47a1c.css.map",
+    "main.e6fcb267.js.map": "./static/js/main.e6fcb267.js.map",
     "787.c1112931.chunk.js.map": "./static/js/787.c1112931.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2152ba5d.css",
-    "static/js/main.b88380d4.js"
+    "static/css/main.88d47a1c.css",
+    "static/js/main.e6fcb267.js"
   ]
 }

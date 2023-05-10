@@ -48,7 +48,7 @@ const decodeEntities = (function() {
 export const cleanText = (str) => decodeEntities(
   stripHtml(
     removeLinks(
-      str.replace(/(\r\n|\n|\r)/gm, "").replace(/'/g, "").replace('"', '').replace(/\\/g, '') // nasty
+      str.replace(/(\r\n|\n|\r)/gm, "").replace(/'/g, "").replace('"', '').replace(/\\/g, '').replace(/[^\w\s]/gi, '') // nasty
     )
   )
 );

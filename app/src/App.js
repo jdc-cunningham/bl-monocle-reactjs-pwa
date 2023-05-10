@@ -92,13 +92,13 @@ function App() {
     console.log('run rn');
     const news = await getWorldNews(3);
 
-    console.log(news);
+    console.log('>>> change 1');
 
     // send to monocle
     sendPythonLines(
       [
-        `load_json_data(obj)`,
-        // `load_json_data(${{data: JSON.stringify(news)}})`,
+        `load_json_data('''${JSON.stringify(news)}''')`,
+        // `load_json_data('${{hey: 'yo'}}')`,
         'read_articles()'
       ],
       setWriting

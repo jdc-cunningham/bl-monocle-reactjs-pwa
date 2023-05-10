@@ -81,7 +81,7 @@ function App() {
     // send to monocle
     sendPythonLines(
       [
-        `load_json_data(${JSON.stringify(articleCommentPairs)})`,
+        `load_json_data('''${JSON.stringify(articleCommentPairs)}''')`,
         'read_articles()'
       ],
       setWriting

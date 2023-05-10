@@ -30,7 +30,7 @@ const processArticles = async (articlesData, finalArticles, resolver) => {
     const { title, num_comments, permalink } = articlesData[0];
 
     const articleCommentPair = {
-      title: `${title.substring(0, 18)}...`,
+      title: `${cleanText(title).substring(0, 18)}...`,
       comment: '',
     };
 

@@ -6,16 +6,14 @@ import gc
 
 count = 1
 article_count = 0
-
 data_store = []
-
 last_displayed = []
+hn_ran = False
 
 def clear_display():
   global last_displayed
 
-  for disp_obj in last_displayed:
-    del(disp_obj)
+  last_displayed = []
 
   display.clear()
   gc.collect()
@@ -83,10 +81,13 @@ def draw_home(msg = '', reddit_active = False, hn_active = False):
   global last_displayed
 
   dh_b = battery_level(round(device.battery_level() / 100, 2))
+  dh_m = main_text(msg)
+  dh_ri = reddit_icon(reddit_active)
+  dh_hni = hn_icon(hn_active)
 
-  last_displayed.append(dh_b)
+  last_displayed = [dh_b, dh_m, dh_ri, dh_hni]
 
-  return sum([dh_b, main_text(msg), reddit_icon(reddit_active), hn_icon(hn_active)], [])
+  return sum([dh_b, dh_m, dh_ri, dh_hni], [])
 
 def display_article(title, lines):
   global last_displayed
@@ -94,20 +95,20 @@ def display_article(title, lines):
   y_pos = 24
 
   t = display.Text(f'{title} {count}/{article_count}', 0, 24, display.BLUE, justify=display.MIDDLE_LEFT)
-  l1 = display.Text(lines[0] if 0 < len(lines) else '', 0, y_pos + 50, display.WHITE, justify=display.MIDDLE_LEFT)
-  l2 = display.Text(lines[1] if 1 < len(lines) else '', 0, y_pos + 100, display.WHITE, justify=display.MIDDLE_LEFT)
-  l3 = display.Text(lines[2] if 2 < len(lines) else '', 0, y_pos + 150, display.WHITE, justify=display.MIDDLE_LEFT)
-  l4 = display.Text(lines[3] if 3 < len(lines) else '', 0, y_pos + 200, display.WHITE, justify=display.MIDDLE_LEFT)
-  l5 = display.Text(lines[4] if 4 < len(lines) else '', 0, y_pos + 250, display.WHITE, justify=display.MIDDLE_LEFT)
-  l6 = display.Text(lines[5] if 5 < len(lines) else '', 0, y_pos + 300, display.WHITE, justify=display.MIDDLE_LEFT)
-  l7 = display.Text(lines[6] if 6 < len(lines) else '', 0, y_pos + 350, display.WHITE, justify=display.MIDDLE_LEFT)
+  l1 = display.Text(lines[0] if 0 < len(lines) else '                          ', 0, y_pos + 50, display.WHITE, justify=display.MIDDLE_LEFT)
+  l2 = display.Text(lines[1] if 1 < len(lines) else '                          ', 0, y_pos + 100, display.WHITE, justify=display.MIDDLE_LEFT)
+  l3 = display.Text(lines[2] if 2 < len(lines) else '                          ', 0, y_pos + 150, display.WHITE, justify=display.MIDDLE_LEFT)
+  l4 = display.Text(lines[3] if 3 < len(lines) else '                          ', 0, y_pos + 200, display.WHITE, justify=display.MIDDLE_LEFT)
+  l5 = display.Text(lines[4] if 4 < len(lines) else '                          ', 0, y_pos + 250, display.WHITE, justify=display.MIDDLE_LEFT)
+  l6 = display.Text(lines[5] if 5 < len(lines) else '                          ', 0, y_pos + 300, display.WHITE, justify=display.MIDDLE_LEFT)
+  l7 = display.Text(lines[6] if 6 < len(lines) else '                          ', 0, y_pos + 350, display.WHITE, justify=display.MIDDLE_LEFT)
 
   last_displayed = [t, l1, l2, l3, l4, l5, l6, l7]
 
   display.show([t, l1, l2, l3, l4, l5, l6, l7])
 
 def read_articles():
-  global data_store, count
+  global data_store, count, hn_ran
   article = data_store[0]
   title = article['title']
   comment = article['comment']
@@ -121,6 +122,20 @@ def read_articles():
     count += 1
     clear_display()
     read_articles()
+  else:
+    count = 0
+    
+    # next app, no async await
+    if (not hn_ran):
+      hn_ran = True
+      clear_display()
+      display.show(draw_home('Loading hacker news...', True))
+
+      time.sleep(3)
+
+      clear_display()
+      load_hn_articles()
+
 
 # run app
 
@@ -136,5 +151,4 @@ time.sleep(3)
 clear_display()
 display.show(draw_home('Loading reddit news...', True))
 
-gc.collect()
 load_reddit_articles()

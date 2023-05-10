@@ -58,7 +58,7 @@ const getHnArticleData = async (articleIds, articleData, promiseResolver) => {
       };
 
     articleData[articleId] = {
-      title: articleTopCommentInfo.title, 
+      title: `${cleanText(articleTopCommentInfo.title).substring(0, 16)} ...`, 
       comment: chunkText(cleanText(articleTopComment.text)),
     };
 

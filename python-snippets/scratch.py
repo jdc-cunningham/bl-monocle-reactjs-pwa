@@ -131,7 +131,7 @@ def read_articles():
 
 
   display_article(title, comment)
-  time.sleep(7)
+  time.sleep(10)
   data_store.pop(0)
   
   if (len(data_store) > 0):

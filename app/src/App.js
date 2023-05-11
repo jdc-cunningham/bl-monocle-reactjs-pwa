@@ -67,7 +67,7 @@ function App() {
   }
 
   const loadHnArticles = async () => {
-    const articles = await getHnTopArticleComments(3);
+    const articles = await getHnTopArticleComments(5);
     const articleCommentPairs = [];
 
     // process into array of title:comment pairs to send to monocle
@@ -90,7 +90,7 @@ function App() {
 
   const loadRedditWorldNews = async () => {
     console.log('run rn');
-    const news = await getWorldNews(3);
+    const news = await getWorldNews(5);
 
     console.log('>>> change 1');
 

@@ -10,7 +10,7 @@ const getTopArticleIds = (limit) => {
       axios.get(`${hnApiBase}/topstories.json`)
         .then(res => resolve(res.data.slice(0, limit)))
         .catch(err => reject(err));
-    }, 500);
+    }, 250);
   });
 }
 
@@ -27,7 +27,7 @@ const getArticleTopCommentId = (articleId) => {
           });
         })
         .catch(err => reject(err));
-      }, 500);
+      }, 250);
   });
 }
 
@@ -39,7 +39,7 @@ const getArticleTopComment = (kidId) => {
         resolve(res.data);
       })
       .catch(err => reject(err));
-    }, 500); // add delays to avoid hammering HN api
+    }, 250); // add delays to avoid hammering HN api
   });
 }
 

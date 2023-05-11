@@ -150,6 +150,9 @@ def read_articles():
       time.sleep(3)
 
       load_hn_articles()
+    else:
+      clear_display()
+      display.show(main_text())
 
 # run app
 

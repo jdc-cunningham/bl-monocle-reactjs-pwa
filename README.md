@@ -10,9 +10,9 @@ There is mobile support (basic responsive design)
 
 **NOTE** the storage info below is wrong, that's RAM, reported storage is not correct on current monocle firmware, it's missing values.
 
-<img src="./monocle-web-editor.JPG"/>
+<img src="./current-ui.JPG"/>
 
-### Try it live
+### Live Demo
 
 View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-reactjs-pwa/">here</a>
 

@@ -4,11 +4,7 @@ This is a very basic web-editor that can combine scripts stored in local storage
 
 Still mostly conceptual since unsure how it will all work regarding what would make sense logic wise.
 
-**NOTE** the whole right side does not work right now
-
 There is mobile support (basic responsive design)
-
-**NOTE** the storage info below is wrong, that's RAM, reported storage is not correct on current monocle firmware, it's missing values.
 
 <img src="./current-ui.JPG"/>
 
@@ -24,7 +20,15 @@ View github pages build <a href="https://jdc-cunningham.github.io/bl-monocle-rea
   - or write to flash
     - need main.py
     - separate file(s) for modules
-      - this does not completely work at this time (needs new monocle firmware update)
+
+Use
+
+```
+import os
+os.listdir("/")
+```
+
+To verify written files, and read contents
 
 ### LocalStorage
 

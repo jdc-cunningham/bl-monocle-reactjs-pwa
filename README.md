@@ -2,11 +2,11 @@
 
 This is a very basic web-editor that can combine scripts stored in local storage and write to monocle flash.
 
-Still mostly conceptual since unsure how it will all work regarding what would make sense logic wise.
-
 There is mobile support (basic responsive design)
 
 <img src="./current-ui.JPG"/>
+
+The rest of the app (hidden sidebar) is in progress. That stuff is still in progress/conceptual regarding how to manage/merge apps on monocle.
 
 ### Live Demo
 

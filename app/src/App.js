@@ -167,13 +167,7 @@ function App() {
       const snippet = snippets[snippetId];
 
       if (snippet.selected) {
-        if (snippet.content.join('').length > 127) {
-          // use linker approach to split up into smaller chunks
-          alert('not sent');
-        
-        } else {
-          files.push(snippets[snippetId]);
-        }
+        files.push(snippets[snippetId]);
       }
     });
 
@@ -190,7 +184,10 @@ function App() {
     if (connected) {
       setTimeout(() => {
         getDeviceInfo();
-      }, 60000);
+        // this poll checks ram, storage, battery
+        // problem is it can interrupt active code on the monocle
+        // ideally this runs often eg. every minute
+      }, 300000); // increase to 5 minutes
     }
   }, [monocleInfo]);
 
